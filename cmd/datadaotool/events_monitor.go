@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	topicHash = paddedEthHash(ethTopicHash("tokensSent(uint256,address)"))
+	topicHash = paddedEthHash(ethTopicHash("DealProposalCreate(bytes32)"))
 )
 
 var eventsMonitorCmd = &cli.Command{
