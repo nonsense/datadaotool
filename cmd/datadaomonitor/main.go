@@ -14,6 +14,7 @@ func main() {
 
 	local := []*cli.Command{
 		runCmd,
+		getDealCmd,
 	}
 
 	app := &cli.App{
