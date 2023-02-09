@@ -68,10 +68,6 @@ var submitDealProposalCmd = &cli.Command{
 			Usage: "duration of the deal in epochs",
 			Value: 518400, // default is 2880 * 180 == 180 days
 		},
-		&cli.IntFlag{
-			Name:  "provider-collateral",
-			Usage: "deal collateral that storage miner must put in escrow; if empty, the min collateral for the given piece size will be used",
-		},
 		&cli.Int64Flag{
 			Name:  "storage-price",
 			Usage: "storage price in attoFIL per epoch per GiB",
