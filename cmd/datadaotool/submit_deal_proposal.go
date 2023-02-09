@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"crypto/ecdsa"
 	"fmt"
 	"math/big"
@@ -15,9 +14,6 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/builtin/v8/market"
-	lcli "github.com/filecoin-project/lotus/cli"
-	cliutil "github.com/filecoin-project/lotus/cli/util"
-	"github.com/filecoin-project/lotus/gateway"
 	"github.com/ipfs/go-cid"
 	"github.com/nonsense/fevmtest/dc"
 	"github.com/urfave/cli/v2"
@@ -116,15 +112,15 @@ var submitDealProposalCmd = &cli.Command{
 		//header := make(http.Header)
 		//header.Add("Authorization", "Bearer "+token)
 
-		ctx := context.Background()
+		//ctx := context.Background()
 
-		subCh := gateway.NewEthSubHandler()
+		//subCh := gateway.NewEthSubHandler()
 
-		api, closer, err := lcli.GetFullNodeAPIV1(cctx, cliutil.FullNodeWithEthSubscribtionHandler(subCh))
-		if err != nil {
-			return err
-		}
-		defer closer()
+		//api, closer, err := lcli.GetFullNodeAPIV1(cctx, cliutil.FullNodeWithEthSubscribtionHandler(subCh))
+		//if err != nil {
+		//return err
+		//}
+		//defer closer()
 
 		endpoint := cctx.String("endpoint")
 
@@ -171,10 +167,10 @@ var submitDealProposalCmd = &cli.Command{
 			GasLimit:  uint64(1000000000),
 		}
 
-		tipset, err := api.ChainHead(ctx)
-		if err != nil {
-			return err
-		}
+		//tipset, err := api.ChainHead(ctx)
+		//if err != nil {
+		//return err
+		//}
 
 		commp := cctx.String("commp")
 		pieceCid, err := cid.Parse(commp)
@@ -198,7 +194,9 @@ var submitDealProposalCmd = &cli.Command{
 			return fmt.Errorf("size of car file cannot be 0")
 		}
 
-		head := tipset.Height()
+		//head := tipset.Height()
+
+		head := abi.ChainEpoch(0)
 
 		startEpoch := head + abi.ChainEpoch(5760)
 		endEpoch := startEpoch + 521280 // startEpoch + 181 days

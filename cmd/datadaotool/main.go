@@ -5,25 +5,23 @@ import (
 
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/urfave/cli/v2"
-
-	"github.com/filecoin-project/lotus/build"
-	"github.com/filecoin-project/lotus/lib/lotuslog"
 )
 
 var log = logging.Logger("datadaotool")
 
 func main() {
-	lotuslog.SetupLogLevels()
+	//lotuslog.SetupLogLevels()
 
 	local := []*cli.Command{
+		getDealCmd,
 		submitDealProposalCmd,
-		eventsMonitorCmd,
+		//		eventsMonitorCmd,
 	}
 
 	app := &cli.App{
-		Name:    "datadaotool",
-		Usage:   "",
-		Version: build.UserVersion(),
+		Name:  "datadaotool",
+		Usage: "",
+		//Version: build.UserVersion(),
 		Flags: []cli.Flag{
 			&cli.StringFlag{
 				Name:    "repo",

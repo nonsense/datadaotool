@@ -51,7 +51,7 @@ type DealClientDealProposal struct {
 
 // DealClientMetaData contains all meta data concerning the DealClient contract.
 var DealClientMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"DealProposalCreate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"received\",\"type\":\"string\"}],\"name\":\"ReceivedDataCap\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"AUTHORIZE_MESSAGE_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DATACAP_RECEIVER_HOOK_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"addCID\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"provider\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"authorizeData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidProviders\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSet\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSizes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getDealParams\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"locationRef\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"removeUnsealedCopy\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"skipIPNIAnnounce\",\"type\":\"bool\"}],\"internalType\":\"structDealClient.DealParams\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getDealProposal\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"method\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"name\":\"handle_filecoin_method\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"_deal\",\"type\":\"tuple\"}],\"name\":\"makeDealProposal\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"_deal\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"locationRef\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"removeUnsealedCopy\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"skipIPNIAnnounce\",\"type\":\"bool\"}],\"internalType\":\"structDealClient.DealParams\",\"name\":\"_dp\",\"type\":\"tuple\"}],\"name\":\"makeDealProposalWithParams\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"params\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"locationRef\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"removeUnsealedCopy\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"skipIPNIAnnounce\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"proposals\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"raw_auth_params\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"callee\",\"type\":\"address\"}],\"name\":\"publish_deal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"DealProposalCreate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"received\",\"type\":\"string\"}],\"name\":\"ReceivedDataCap\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"AUTHORIZE_MESSAGE_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DATACAP_RECEIVER_HOOK_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"addCID\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"provider\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"authorizeData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidProviders\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSet\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSizes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getDealParams\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"locationRef\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"removeUnsealedCopy\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"skipIPNIAnnounce\",\"type\":\"bool\"}],\"internalType\":\"structDealClient.DealParams\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getDealProposal\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"method\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"name\":\"handle_filecoin_method\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"_deal\",\"type\":\"tuple\"}],\"name\":\"makeDealProposal\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"_deal\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"locationRef\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"removeUnsealedCopy\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"skipIPNIAnnounce\",\"type\":\"bool\"}],\"internalType\":\"structDealClient.DealParams\",\"name\":\"_dp\",\"type\":\"tuple\"}],\"name\":\"makeDealProposalWithParams\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"params\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"locationRef\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"removeUnsealedCopy\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"skipIPNIAnnounce\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"proposals\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"raw_auth_params\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"callee\",\"type\":\"address\"}],\"name\":\"publish_deal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // DealClientABI is the input ABI used to generate the binding from.
@@ -355,6 +355,68 @@ func (_DealClient *DealClientCallerSession) CidSizes(arg0 []byte) (*big.Int, err
 	return _DealClient.Contract.CidSizes(&_DealClient.CallOpts, arg0)
 }
 
+// GetDealParams is a free data retrieval call binding the contract method 0x62798bb9.
+//
+// Solidity: function getDealParams(bytes32 id) view returns((string,bool,bool))
+func (_DealClient *DealClientCaller) GetDealParams(opts *bind.CallOpts, id [32]byte) (DealClientDealParams, error) {
+	var out []interface{}
+	err := _DealClient.contract.Call(opts, &out, "getDealParams", id)
+
+	if err != nil {
+		return *new(DealClientDealParams), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(DealClientDealParams)).(*DealClientDealParams)
+
+	return out0, err
+
+}
+
+// GetDealParams is a free data retrieval call binding the contract method 0x62798bb9.
+//
+// Solidity: function getDealParams(bytes32 id) view returns((string,bool,bool))
+func (_DealClient *DealClientSession) GetDealParams(id [32]byte) (DealClientDealParams, error) {
+	return _DealClient.Contract.GetDealParams(&_DealClient.CallOpts, id)
+}
+
+// GetDealParams is a free data retrieval call binding the contract method 0x62798bb9.
+//
+// Solidity: function getDealParams(bytes32 id) view returns((string,bool,bool))
+func (_DealClient *DealClientCallerSession) GetDealParams(id [32]byte) (DealClientDealParams, error) {
+	return _DealClient.Contract.GetDealParams(&_DealClient.CallOpts, id)
+}
+
+// GetDealProposal is a free data retrieval call binding the contract method 0xf4b2e4d8.
+//
+// Solidity: function getDealProposal(bytes32 id) view returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64))
+func (_DealClient *DealClientCaller) GetDealProposal(opts *bind.CallOpts, id [32]byte) (DealClientDealProposal, error) {
+	var out []interface{}
+	err := _DealClient.contract.Call(opts, &out, "getDealProposal", id)
+
+	if err != nil {
+		return *new(DealClientDealProposal), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(DealClientDealProposal)).(*DealClientDealProposal)
+
+	return out0, err
+
+}
+
+// GetDealProposal is a free data retrieval call binding the contract method 0xf4b2e4d8.
+//
+// Solidity: function getDealProposal(bytes32 id) view returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64))
+func (_DealClient *DealClientSession) GetDealProposal(id [32]byte) (DealClientDealProposal, error) {
+	return _DealClient.Contract.GetDealProposal(&_DealClient.CallOpts, id)
+}
+
+// GetDealProposal is a free data retrieval call binding the contract method 0xf4b2e4d8.
+//
+// Solidity: function getDealProposal(bytes32 id) view returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64))
+func (_DealClient *DealClientCallerSession) GetDealProposal(id [32]byte) (DealClientDealProposal, error) {
+	return _DealClient.Contract.GetDealProposal(&_DealClient.CallOpts, id)
+}
+
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
@@ -561,48 +623,6 @@ func (_DealClient *DealClientSession) AuthorizeData(cidraw []byte, provider []by
 // Solidity: function authorizeData(bytes cidraw, bytes provider, uint256 size) returns()
 func (_DealClient *DealClientTransactorSession) AuthorizeData(cidraw []byte, provider []byte, size *big.Int) (*types.Transaction, error) {
 	return _DealClient.Contract.AuthorizeData(&_DealClient.TransactOpts, cidraw, provider, size)
-}
-
-// GetDealParams is a paid mutator transaction binding the contract method 0x62798bb9.
-//
-// Solidity: function getDealParams(bytes32 id) returns((string,bool,bool))
-func (_DealClient *DealClientTransactor) GetDealParams(opts *bind.TransactOpts, id [32]byte) (*types.Transaction, error) {
-	return _DealClient.contract.Transact(opts, "getDealParams", id)
-}
-
-// GetDealParams is a paid mutator transaction binding the contract method 0x62798bb9.
-//
-// Solidity: function getDealParams(bytes32 id) returns((string,bool,bool))
-func (_DealClient *DealClientSession) GetDealParams(id [32]byte) (*types.Transaction, error) {
-	return _DealClient.Contract.GetDealParams(&_DealClient.TransactOpts, id)
-}
-
-// GetDealParams is a paid mutator transaction binding the contract method 0x62798bb9.
-//
-// Solidity: function getDealParams(bytes32 id) returns((string,bool,bool))
-func (_DealClient *DealClientTransactorSession) GetDealParams(id [32]byte) (*types.Transaction, error) {
-	return _DealClient.Contract.GetDealParams(&_DealClient.TransactOpts, id)
-}
-
-// GetDealProposal is a paid mutator transaction binding the contract method 0xf4b2e4d8.
-//
-// Solidity: function getDealProposal(bytes32 id) returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64))
-func (_DealClient *DealClientTransactor) GetDealProposal(opts *bind.TransactOpts, id [32]byte) (*types.Transaction, error) {
-	return _DealClient.contract.Transact(opts, "getDealProposal", id)
-}
-
-// GetDealProposal is a paid mutator transaction binding the contract method 0xf4b2e4d8.
-//
-// Solidity: function getDealProposal(bytes32 id) returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64))
-func (_DealClient *DealClientSession) GetDealProposal(id [32]byte) (*types.Transaction, error) {
-	return _DealClient.Contract.GetDealProposal(&_DealClient.TransactOpts, id)
-}
-
-// GetDealProposal is a paid mutator transaction binding the contract method 0xf4b2e4d8.
-//
-// Solidity: function getDealProposal(bytes32 id) returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64))
-func (_DealClient *DealClientTransactorSession) GetDealProposal(id [32]byte) (*types.Transaction, error) {
-	return _DealClient.Contract.GetDealProposal(&_DealClient.TransactOpts, id)
 }
 
 // HandleFilecoinMethod is a paid mutator transaction binding the contract method 0x868e10c4.
