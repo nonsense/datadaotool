@@ -160,7 +160,7 @@ var submitDealProposalCmd = &cli.Command{
 			Signer:    signFn,
 			Nonce:     nil,
 			Value:     nil,
-			GasLimit:  uint64(1000000000),
+			GasLimit:  uint64(10000000000),
 		}
 
 		//tipset, err := api.ChainHead(ctx)

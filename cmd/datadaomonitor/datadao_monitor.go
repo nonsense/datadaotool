@@ -22,8 +22,8 @@ var (
 	topicHash = paddedEthHash(ethTopicHash("DealProposalCreate(bytes32)"))
 )
 
-var eventsMonitorCmd = &cli.Command{
-	Name:  "events-monitor",
+var runCmd = &cli.Command{
+	Name:  "run",
 	Usage: "Starts an event monitor",
 	Flags: []cli.Flag{},
 	Action: func(cctx *cli.Context) error {
@@ -45,7 +45,8 @@ var eventsMonitorCmd = &cli.Command{
 			Params:    &ethtypes.EthSubscriptionParams{Topics: topicSpec},
 		})
 
-		fmt.Println("calling eth subscribe with subParam: ", subParam)
+		fmt.Println("topicHash: ", topicHash)
+		fmt.Println("calling eth subscribe with subParam: ", string(subParam))
 		subID, err := api.EthSubscribe(ctx, subParam)
 		if err != nil {
 			return err
