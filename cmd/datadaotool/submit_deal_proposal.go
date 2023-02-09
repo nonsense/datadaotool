@@ -138,7 +138,7 @@ var submitDealProposalCmd = &cli.Command{
 		privateKey := cctx.String("private-key")
 		pk, err := crypto.HexToECDSA(privateKey)
 		if err != nil {
-			return err
+			return fmt.Errorf("broken pk: %v", err)
 		}
 
 		publicKey := pk.Public()
@@ -198,12 +198,13 @@ var submitDealProposalCmd = &cli.Command{
 		endEpoch := startEpoch + 521280 // startEpoch + 181 days
 		l, err := market.NewLabelFromString(rootCid.String())
 		if err != nil {
-			return err
+			return fmt.Errorf("new label err: %w", err)
 		}
-		lbytes, err := l.ToBytes()
+		ll, err := l.ToString()
 		if err != nil {
-			return err
+			return fmt.Errorf("label to string err: %w", err)
 		}
+		lbytes := []byte(ll)
 
 		clientAddr, err := address.NewFromString(cctx.String("client")) // i guess the f4 address to the contract that should verify the deal?
 		if err != nil {
