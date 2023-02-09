@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/hex"
 	"fmt"
 
 	"github.com/davecgh/go-spew/spew"
@@ -42,13 +41,10 @@ var getDealCmd = &cli.Command{
 			return err
 		}
 
-		id, err := hex.DecodeString(cctx.String("id"))
-		if err != nil {
-			return err
-		}
+		id := common.HexToHash(cctx.String("id"))
 
 		var id32 [32]byte
-		copy(id32[:], id[:8])
+		copy(id32[:], id.Bytes()[:32])
 
 		proposal, err := dealclient.GetDealProposal(nil, id32)
 		if err != nil {
