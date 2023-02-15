@@ -194,15 +194,14 @@ var submitDealProposalCmd = &cli.Command{
 
 		startEpoch := head + abi.ChainEpoch(5760)
 		endEpoch := startEpoch + 521280 // startEpoch + 181 days
-		l, err := market.NewLabelFromString(rootCid.String())
+		l, err := market.NewLabelFromBytes(rootCid.Bytes())
 		if err != nil {
 			return fmt.Errorf("new label err: %w", err)
 		}
-		ll, err := l.ToString()
+		lbytes, err := l.ToBytes()
 		if err != nil {
 			return fmt.Errorf("label to string err: %w", err)
 		}
-		lbytes := []byte(ll)
 
 		clientAddr, err := address.NewFromString(cctx.String("client")) // i guess the f4 address to the contract that should verify the deal?
 		if err != nil {
@@ -213,14 +212,17 @@ var submitDealProposalCmd = &cli.Command{
 		// params marshalling
 		paramsRecord := struct {
 			LocationRef      string
+			CarSize          uint64
 			SkipIpniAnnounce bool
 		}{
 			cctx.String("location_ref"),
+			cctx.Uint64("car-size"),
 			cctx.Bool("skip-ipni-announce"),
 		}
 
 		paramsVersion1, _ := ethabi.NewType("tuple", "paramsVersion1", []ethabi.ArgumentMarshaling{
 			{Name: "location_ref", Type: "string"},
+			{Name: "car_size", Type: "int256"},
 			{Name: "skip_ipni_announce", Type: "bool"},
 		})
 
@@ -242,7 +244,7 @@ var submitDealProposalCmd = &cli.Command{
 			Label:                lbytes,
 			StartEpoch:           uint64(startEpoch),
 			EndEpoch:             uint64(endEpoch),
-			StoragePricePerEpoch: 1,
+			StoragePricePerEpoch: cctx.Uint64("storage-price"),
 			ProviderCollateral:   providerCollateral,
 			ClientCollateral:     0,
 			Version:              cctx.String("version"),
