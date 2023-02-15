@@ -35,7 +35,7 @@ func main() {
 			},
 			&cli.StringFlag{
 				Name:  "endpoint",
-				Value: "ws://localhost:1234/rpc/v1",
+				Value: "http://localhost:1234/rpc/v1",
 				//Value: "ws://api.hyperspace.node.glif.io/rpc/v1",
 				//Value: "wss://wss.hyperspace.node.glif.io/apigw/lotus",
 

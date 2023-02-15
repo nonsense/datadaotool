@@ -1,10 +1,14 @@
 package main
 
 import (
+	"context"
 	"crypto/ecdsa"
 	"fmt"
 	"math/big"
+	"time"
 
+	"github.com/davecgh/go-spew/spew"
+	ethabi "github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -12,6 +16,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/filecoin-project/go-address"
+
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/builtin/v8/market"
 	"github.com/ipfs/go-cid"
@@ -106,27 +111,21 @@ var submitDealProposalCmd = &cli.Command{
 			Usage: "",
 			Value: "0x690b9a9e9aa1c9db991c7721a92d351db4fac990",
 		},
+		&cli.StringFlag{
+			Name:  "version",
+			Usage: "",
+			Value: "1",
+		},
+		&cli.StringFlag{
+			Name:  "location_ref",
+			Usage: "",
+			Value: "http://webserver.com/carfile.car",
+		},
 	},
 	Action: func(cctx *cli.Context) error {
-
-		//header := make(http.Header)
-		//header.Add("Authorization", "Bearer "+token)
-
-		//ctx := context.Background()
-
-		//subCh := gateway.NewEthSubHandler()
-
-		//api, closer, err := lcli.GetFullNodeAPIV1(cctx, cliutil.FullNodeWithEthSubscribtionHandler(subCh))
-		//if err != nil {
-		//return err
-		//}
-		//defer closer()
-
 		endpoint := cctx.String("endpoint")
 
-		//ctx := context.Background()
 		cl, err := rpc.Dial(endpoint)
-		//cl, err := rpc.DialWebsocketWithHeader(ctx, endpoint, "", header) // fork
 		if err != nil {
 			return err
 		}
@@ -166,11 +165,6 @@ var submitDealProposalCmd = &cli.Command{
 			Value:     nil,
 			GasLimit:  uint64(10000000000),
 		}
-
-		//tipset, err := api.ChainHead(ctx)
-		//if err != nil {
-		//return err
-		//}
 
 		commp := cctx.String("commp")
 		pieceCid, err := cid.Parse(commp)
@@ -214,15 +208,30 @@ var submitDealProposalCmd = &cli.Command{
 		if err != nil {
 			return err
 		}
-
-		//ProviderCollateral:   policy.MaxProviderCollateral, // this value is chain dependent and is 0 on devnet, and currently a multiple of 147276332 on mainnet
 		providerCollateral := uint64(0)
 
-		//params := dc.DealClientDealParams{
-		//LocationRef:        "http://mywebserver/myfile.car",
-		//RemoveUnsealedCopy: false,
-		//SkipIPNIAnnounce:   false,
-		//}
+		// params marshalling
+		paramsRecord := struct {
+			LocationRef      string
+			SkipIpniAnnounce bool
+		}{
+			cctx.String("location_ref"),
+			cctx.Bool("skip-ipni-announce"),
+		}
+
+		paramsVersion1, _ := ethabi.NewType("tuple", "paramsVersion1", []ethabi.ArgumentMarshaling{
+			{Name: "location_ref", Type: "string"},
+			{Name: "skip_ipni_announce", Type: "bool"},
+		})
+
+		params, err := ethabi.Arguments{
+			{Type: paramsVersion1, Name: "paramsVersion1"},
+		}.Pack(&paramsRecord)
+		if err != nil {
+			return err
+		}
+
+		spew.Dump(params)
 
 		dealProposal := dc.DealClientDealProposal{
 			PieceCid:        pieceCid.Bytes(),
@@ -236,7 +245,8 @@ var submitDealProposalCmd = &cli.Command{
 			StoragePricePerEpoch: 1,
 			ProviderCollateral:   providerCollateral,
 			ClientCollateral:     0,
-			Params:               []byte{}, // add abi.encode(params)
+			Version:              cctx.String("version"),
+			Params:               params,
 		}
 
 		tx, err := dealclient.MakeDealProposal(opts, dealProposal)
@@ -246,6 +256,16 @@ var submitDealProposalCmd = &cli.Command{
 
 		fmt.Println()
 		fmt.Println(tx.Hash())
+
+		time.Sleep(15 * time.Second)
+
+		hash := tx.Hash()
+		receipt, err := client.TransactionReceipt(context.Background(), hash)
+		if err != nil {
+			panic(err)
+		}
+
+		spew.Dump(receipt)
 
 		return nil
 	},
