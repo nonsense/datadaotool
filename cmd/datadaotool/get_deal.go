@@ -51,14 +51,14 @@ var getDealCmd = &cli.Command{
 			panic(err)
 		}
 
-		params, err := dealclient.GetDealParams(nil, id32)
-		if err != nil {
-			panic(err)
-		}
+		//params, err := dealclient.GetDealParams(nil, id32)
+		//if err != nil {
+		//panic(err)
+		//}
 
 		fmt.Println()
 		spew.Dump(proposal)
-		spew.Dump(params)
+		//spew.Dump(params)
 
 		return nil
 	},

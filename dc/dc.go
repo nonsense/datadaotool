@@ -28,13 +28,6 @@ var (
 	_ = event.NewSubscription
 )
 
-// DealClientDealParams is an auto generated low-level Go binding around an user-defined struct.
-type DealClientDealParams struct {
-	LocationRef        string
-	RemoveUnsealedCopy bool
-	SkipIPNIAnnounce   bool
-}
-
 // DealClientDealProposal is an auto generated low-level Go binding around an user-defined struct.
 type DealClientDealProposal struct {
 	PieceCid             []byte
@@ -47,11 +40,13 @@ type DealClientDealProposal struct {
 	StoragePricePerEpoch uint64
 	ProviderCollateral   uint64
 	ClientCollateral     uint64
+	Version              string
+	Params               []byte
 }
 
 // DealClientMetaData contains all meta data concerning the DealClient contract.
 var DealClientMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"DealProposalCreate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"received\",\"type\":\"string\"}],\"name\":\"ReceivedDataCap\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"AUTHORIZE_MESSAGE_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DATACAP_RECEIVER_HOOK_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"addCID\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"provider\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"authorizeData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidProviders\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSet\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSizes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getDealParams\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"locationRef\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"removeUnsealedCopy\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"skipIPNIAnnounce\",\"type\":\"bool\"}],\"internalType\":\"structDealClient.DealParams\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getDealProposal\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"method\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"name\":\"handle_filecoin_method\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"_deal\",\"type\":\"tuple\"}],\"name\":\"makeDealProposal\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"_deal\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"string\",\"name\":\"locationRef\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"removeUnsealedCopy\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"skipIPNIAnnounce\",\"type\":\"bool\"}],\"internalType\":\"structDealClient.DealParams\",\"name\":\"_dp\",\"type\":\"tuple\"}],\"name\":\"makeDealProposalWithParams\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"params\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"locationRef\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"removeUnsealedCopy\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"skipIPNIAnnounce\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"proposals\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"raw_auth_params\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"callee\",\"type\":\"address\"}],\"name\":\"publish_deal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"DealProposalCreate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"received\",\"type\":\"string\"}],\"name\":\"ReceivedDataCap\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"AUTHORIZE_MESSAGE_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DATACAP_RECEIVER_HOOK_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"addCID\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"provider\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"authorizeData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidProviders\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSet\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSizes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getDealProposal\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"},{\"internalType\":\"string\",\"name\":\"version\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"method\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"name\":\"handle_filecoin_method\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"},{\"internalType\":\"string\",\"name\":\"version\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"internalType\":\"structDealClient.DealProposal\",\"name\":\"_deal\",\"type\":\"tuple\"}],\"name\":\"makeDealProposal\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"proposals\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"paddedPieceSize\",\"type\":\"uint64\"},{\"internalType\":\"bool\",\"name\":\"verifiedDeal\",\"type\":\"bool\"},{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"label\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"startEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"storagePricePerEpoch\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"providerCollateral\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"clientCollateral\",\"type\":\"uint64\"},{\"internalType\":\"string\",\"name\":\"version\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"raw_auth_params\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"callee\",\"type\":\"address\"}],\"name\":\"publish_deal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // DealClientABI is the input ABI used to generate the binding from.
@@ -355,40 +350,9 @@ func (_DealClient *DealClientCallerSession) CidSizes(arg0 []byte) (*big.Int, err
 	return _DealClient.Contract.CidSizes(&_DealClient.CallOpts, arg0)
 }
 
-// GetDealParams is a free data retrieval call binding the contract method 0x62798bb9.
-//
-// Solidity: function getDealParams(bytes32 id) view returns((string,bool,bool))
-func (_DealClient *DealClientCaller) GetDealParams(opts *bind.CallOpts, id [32]byte) (DealClientDealParams, error) {
-	var out []interface{}
-	err := _DealClient.contract.Call(opts, &out, "getDealParams", id)
-
-	if err != nil {
-		return *new(DealClientDealParams), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(DealClientDealParams)).(*DealClientDealParams)
-
-	return out0, err
-
-}
-
-// GetDealParams is a free data retrieval call binding the contract method 0x62798bb9.
-//
-// Solidity: function getDealParams(bytes32 id) view returns((string,bool,bool))
-func (_DealClient *DealClientSession) GetDealParams(id [32]byte) (DealClientDealParams, error) {
-	return _DealClient.Contract.GetDealParams(&_DealClient.CallOpts, id)
-}
-
-// GetDealParams is a free data retrieval call binding the contract method 0x62798bb9.
-//
-// Solidity: function getDealParams(bytes32 id) view returns((string,bool,bool))
-func (_DealClient *DealClientCallerSession) GetDealParams(id [32]byte) (DealClientDealParams, error) {
-	return _DealClient.Contract.GetDealParams(&_DealClient.CallOpts, id)
-}
-
 // GetDealProposal is a free data retrieval call binding the contract method 0xf4b2e4d8.
 //
-// Solidity: function getDealProposal(bytes32 id) view returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64))
+// Solidity: function getDealProposal(bytes32 id) view returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64,string,bytes))
 func (_DealClient *DealClientCaller) GetDealProposal(opts *bind.CallOpts, id [32]byte) (DealClientDealProposal, error) {
 	var out []interface{}
 	err := _DealClient.contract.Call(opts, &out, "getDealProposal", id)
@@ -405,14 +369,14 @@ func (_DealClient *DealClientCaller) GetDealProposal(opts *bind.CallOpts, id [32
 
 // GetDealProposal is a free data retrieval call binding the contract method 0xf4b2e4d8.
 //
-// Solidity: function getDealProposal(bytes32 id) view returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64))
+// Solidity: function getDealProposal(bytes32 id) view returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64,string,bytes))
 func (_DealClient *DealClientSession) GetDealProposal(id [32]byte) (DealClientDealProposal, error) {
 	return _DealClient.Contract.GetDealProposal(&_DealClient.CallOpts, id)
 }
 
 // GetDealProposal is a free data retrieval call binding the contract method 0xf4b2e4d8.
 //
-// Solidity: function getDealProposal(bytes32 id) view returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64))
+// Solidity: function getDealProposal(bytes32 id) view returns((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64,string,bytes))
 func (_DealClient *DealClientCallerSession) GetDealProposal(id [32]byte) (DealClientDealProposal, error) {
 	return _DealClient.Contract.GetDealProposal(&_DealClient.CallOpts, id)
 }
@@ -448,59 +412,9 @@ func (_DealClient *DealClientCallerSession) Owner() (common.Address, error) {
 	return _DealClient.Contract.Owner(&_DealClient.CallOpts)
 }
 
-// Params is a free data retrieval call binding the contract method 0xdc6ab527.
-//
-// Solidity: function params(bytes32 ) view returns(string locationRef, bool removeUnsealedCopy, bool skipIPNIAnnounce)
-func (_DealClient *DealClientCaller) Params(opts *bind.CallOpts, arg0 [32]byte) (struct {
-	LocationRef        string
-	RemoveUnsealedCopy bool
-	SkipIPNIAnnounce   bool
-}, error) {
-	var out []interface{}
-	err := _DealClient.contract.Call(opts, &out, "params", arg0)
-
-	outstruct := new(struct {
-		LocationRef        string
-		RemoveUnsealedCopy bool
-		SkipIPNIAnnounce   bool
-	})
-	if err != nil {
-		return *outstruct, err
-	}
-
-	outstruct.LocationRef = *abi.ConvertType(out[0], new(string)).(*string)
-	outstruct.RemoveUnsealedCopy = *abi.ConvertType(out[1], new(bool)).(*bool)
-	outstruct.SkipIPNIAnnounce = *abi.ConvertType(out[2], new(bool)).(*bool)
-
-	return *outstruct, err
-
-}
-
-// Params is a free data retrieval call binding the contract method 0xdc6ab527.
-//
-// Solidity: function params(bytes32 ) view returns(string locationRef, bool removeUnsealedCopy, bool skipIPNIAnnounce)
-func (_DealClient *DealClientSession) Params(arg0 [32]byte) (struct {
-	LocationRef        string
-	RemoveUnsealedCopy bool
-	SkipIPNIAnnounce   bool
-}, error) {
-	return _DealClient.Contract.Params(&_DealClient.CallOpts, arg0)
-}
-
-// Params is a free data retrieval call binding the contract method 0xdc6ab527.
-//
-// Solidity: function params(bytes32 ) view returns(string locationRef, bool removeUnsealedCopy, bool skipIPNIAnnounce)
-func (_DealClient *DealClientCallerSession) Params(arg0 [32]byte) (struct {
-	LocationRef        string
-	RemoveUnsealedCopy bool
-	SkipIPNIAnnounce   bool
-}, error) {
-	return _DealClient.Contract.Params(&_DealClient.CallOpts, arg0)
-}
-
 // Proposals is a free data retrieval call binding the contract method 0x32ed5b12.
 //
-// Solidity: function proposals(bytes32 ) view returns(bytes pieceCid, uint64 paddedPieceSize, bool verifiedDeal, bytes client, bytes label, uint64 startEpoch, uint64 endEpoch, uint64 storagePricePerEpoch, uint64 providerCollateral, uint64 clientCollateral)
+// Solidity: function proposals(bytes32 ) view returns(bytes pieceCid, uint64 paddedPieceSize, bool verifiedDeal, bytes client, bytes label, uint64 startEpoch, uint64 endEpoch, uint64 storagePricePerEpoch, uint64 providerCollateral, uint64 clientCollateral, string version, bytes params)
 func (_DealClient *DealClientCaller) Proposals(opts *bind.CallOpts, arg0 [32]byte) (struct {
 	PieceCid             []byte
 	PaddedPieceSize      uint64
@@ -512,6 +426,8 @@ func (_DealClient *DealClientCaller) Proposals(opts *bind.CallOpts, arg0 [32]byt
 	StoragePricePerEpoch uint64
 	ProviderCollateral   uint64
 	ClientCollateral     uint64
+	Version              string
+	Params               []byte
 }, error) {
 	var out []interface{}
 	err := _DealClient.contract.Call(opts, &out, "proposals", arg0)
@@ -527,6 +443,8 @@ func (_DealClient *DealClientCaller) Proposals(opts *bind.CallOpts, arg0 [32]byt
 		StoragePricePerEpoch uint64
 		ProviderCollateral   uint64
 		ClientCollateral     uint64
+		Version              string
+		Params               []byte
 	})
 	if err != nil {
 		return *outstruct, err
@@ -542,6 +460,8 @@ func (_DealClient *DealClientCaller) Proposals(opts *bind.CallOpts, arg0 [32]byt
 	outstruct.StoragePricePerEpoch = *abi.ConvertType(out[7], new(uint64)).(*uint64)
 	outstruct.ProviderCollateral = *abi.ConvertType(out[8], new(uint64)).(*uint64)
 	outstruct.ClientCollateral = *abi.ConvertType(out[9], new(uint64)).(*uint64)
+	outstruct.Version = *abi.ConvertType(out[10], new(string)).(*string)
+	outstruct.Params = *abi.ConvertType(out[11], new([]byte)).(*[]byte)
 
 	return *outstruct, err
 
@@ -549,7 +469,7 @@ func (_DealClient *DealClientCaller) Proposals(opts *bind.CallOpts, arg0 [32]byt
 
 // Proposals is a free data retrieval call binding the contract method 0x32ed5b12.
 //
-// Solidity: function proposals(bytes32 ) view returns(bytes pieceCid, uint64 paddedPieceSize, bool verifiedDeal, bytes client, bytes label, uint64 startEpoch, uint64 endEpoch, uint64 storagePricePerEpoch, uint64 providerCollateral, uint64 clientCollateral)
+// Solidity: function proposals(bytes32 ) view returns(bytes pieceCid, uint64 paddedPieceSize, bool verifiedDeal, bytes client, bytes label, uint64 startEpoch, uint64 endEpoch, uint64 storagePricePerEpoch, uint64 providerCollateral, uint64 clientCollateral, string version, bytes params)
 func (_DealClient *DealClientSession) Proposals(arg0 [32]byte) (struct {
 	PieceCid             []byte
 	PaddedPieceSize      uint64
@@ -561,13 +481,15 @@ func (_DealClient *DealClientSession) Proposals(arg0 [32]byte) (struct {
 	StoragePricePerEpoch uint64
 	ProviderCollateral   uint64
 	ClientCollateral     uint64
+	Version              string
+	Params               []byte
 }, error) {
 	return _DealClient.Contract.Proposals(&_DealClient.CallOpts, arg0)
 }
 
 // Proposals is a free data retrieval call binding the contract method 0x32ed5b12.
 //
-// Solidity: function proposals(bytes32 ) view returns(bytes pieceCid, uint64 paddedPieceSize, bool verifiedDeal, bytes client, bytes label, uint64 startEpoch, uint64 endEpoch, uint64 storagePricePerEpoch, uint64 providerCollateral, uint64 clientCollateral)
+// Solidity: function proposals(bytes32 ) view returns(bytes pieceCid, uint64 paddedPieceSize, bool verifiedDeal, bytes client, bytes label, uint64 startEpoch, uint64 endEpoch, uint64 storagePricePerEpoch, uint64 providerCollateral, uint64 clientCollateral, string version, bytes params)
 func (_DealClient *DealClientCallerSession) Proposals(arg0 [32]byte) (struct {
 	PieceCid             []byte
 	PaddedPieceSize      uint64
@@ -579,6 +501,8 @@ func (_DealClient *DealClientCallerSession) Proposals(arg0 [32]byte) (struct {
 	StoragePricePerEpoch uint64
 	ProviderCollateral   uint64
 	ClientCollateral     uint64
+	Version              string
+	Params               []byte
 }, error) {
 	return _DealClient.Contract.Proposals(&_DealClient.CallOpts, arg0)
 }
@@ -646,46 +570,25 @@ func (_DealClient *DealClientTransactorSession) HandleFilecoinMethod(method uint
 	return _DealClient.Contract.HandleFilecoinMethod(&_DealClient.TransactOpts, method, arg1, params)
 }
 
-// MakeDealProposal is a paid mutator transaction binding the contract method 0x2d0523f0.
+// MakeDealProposal is a paid mutator transaction binding the contract method 0xc1117182.
 //
-// Solidity: function makeDealProposal((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64) _deal) returns(bytes32)
+// Solidity: function makeDealProposal((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64,string,bytes) _deal) returns(bytes32)
 func (_DealClient *DealClientTransactor) MakeDealProposal(opts *bind.TransactOpts, _deal DealClientDealProposal) (*types.Transaction, error) {
 	return _DealClient.contract.Transact(opts, "makeDealProposal", _deal)
 }
 
-// MakeDealProposal is a paid mutator transaction binding the contract method 0x2d0523f0.
+// MakeDealProposal is a paid mutator transaction binding the contract method 0xc1117182.
 //
-// Solidity: function makeDealProposal((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64) _deal) returns(bytes32)
+// Solidity: function makeDealProposal((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64,string,bytes) _deal) returns(bytes32)
 func (_DealClient *DealClientSession) MakeDealProposal(_deal DealClientDealProposal) (*types.Transaction, error) {
 	return _DealClient.Contract.MakeDealProposal(&_DealClient.TransactOpts, _deal)
 }
 
-// MakeDealProposal is a paid mutator transaction binding the contract method 0x2d0523f0.
+// MakeDealProposal is a paid mutator transaction binding the contract method 0xc1117182.
 //
-// Solidity: function makeDealProposal((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64) _deal) returns(bytes32)
+// Solidity: function makeDealProposal((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64,string,bytes) _deal) returns(bytes32)
 func (_DealClient *DealClientTransactorSession) MakeDealProposal(_deal DealClientDealProposal) (*types.Transaction, error) {
 	return _DealClient.Contract.MakeDealProposal(&_DealClient.TransactOpts, _deal)
-}
-
-// MakeDealProposalWithParams is a paid mutator transaction binding the contract method 0xc275f7fd.
-//
-// Solidity: function makeDealProposalWithParams((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64) _deal, (string,bool,bool) _dp) returns(bytes32)
-func (_DealClient *DealClientTransactor) MakeDealProposalWithParams(opts *bind.TransactOpts, _deal DealClientDealProposal, _dp DealClientDealParams) (*types.Transaction, error) {
-	return _DealClient.contract.Transact(opts, "makeDealProposalWithParams", _deal, _dp)
-}
-
-// MakeDealProposalWithParams is a paid mutator transaction binding the contract method 0xc275f7fd.
-//
-// Solidity: function makeDealProposalWithParams((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64) _deal, (string,bool,bool) _dp) returns(bytes32)
-func (_DealClient *DealClientSession) MakeDealProposalWithParams(_deal DealClientDealProposal, _dp DealClientDealParams) (*types.Transaction, error) {
-	return _DealClient.Contract.MakeDealProposalWithParams(&_DealClient.TransactOpts, _deal, _dp)
-}
-
-// MakeDealProposalWithParams is a paid mutator transaction binding the contract method 0xc275f7fd.
-//
-// Solidity: function makeDealProposalWithParams((bytes,uint64,bool,bytes,bytes,uint64,uint64,uint64,uint64,uint64) _deal, (string,bool,bool) _dp) returns(bytes32)
-func (_DealClient *DealClientTransactorSession) MakeDealProposalWithParams(_deal DealClientDealProposal, _dp DealClientDealParams) (*types.Transaction, error) {
-	return _DealClient.Contract.MakeDealProposalWithParams(&_DealClient.TransactOpts, _deal, _dp)
 }
 
 // PublishDeal is a paid mutator transaction binding the contract method 0xd75fb3c8.

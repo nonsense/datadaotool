@@ -21,7 +21,11 @@ import (
 
 var (
 	// chain id -- ideally fetch this from chain, but seems like rpc is not supported just yet
-	chainId = big.NewInt(31415926)
+	// testnet
+	//chainId = big.NewInt(31415926)
+
+	// hyperspace
+	chainId = big.NewInt(3141)
 
 	//chainID, err := client.NetworkID(context.Background())
 	//if err != nil {
@@ -214,11 +218,11 @@ var submitDealProposalCmd = &cli.Command{
 		//ProviderCollateral:   policy.MaxProviderCollateral, // this value is chain dependent and is 0 on devnet, and currently a multiple of 147276332 on mainnet
 		providerCollateral := uint64(0)
 
-		dealParams := dc.DealClientDealParams{
-			LocationRef:        "http://mywebserver/myfile.car",
-			RemoveUnsealedCopy: false,
-			SkipIPNIAnnounce:   false,
-		}
+		//params := dc.DealClientDealParams{
+		//LocationRef:        "http://mywebserver/myfile.car",
+		//RemoveUnsealedCopy: false,
+		//SkipIPNIAnnounce:   false,
+		//}
 
 		dealProposal := dc.DealClientDealProposal{
 			PieceCid:        pieceCid.Bytes(),
@@ -232,9 +236,10 @@ var submitDealProposalCmd = &cli.Command{
 			StoragePricePerEpoch: 1,
 			ProviderCollateral:   providerCollateral,
 			ClientCollateral:     0,
+			Params:               []byte{}, // add abi.encode(params)
 		}
 
-		tx, err := dealclient.MakeDealProposalWithParams(opts, dealProposal, dealParams)
+		tx, err := dealclient.MakeDealProposal(opts, dealProposal)
 		if err != nil {
 			panic(err)
 		}

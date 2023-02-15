@@ -167,42 +167,6 @@
           "type": "bytes32"
         }
       ],
-      "name": "getDealParams",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "string",
-              "name": "locationRef",
-              "type": "string"
-            },
-            {
-              "internalType": "bool",
-              "name": "removeUnsealedCopy",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "skipIPNIAnnounce",
-              "type": "bool"
-            }
-          ],
-          "internalType": "struct DealClient.DealParams",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "id",
-          "type": "bytes32"
-        }
-      ],
       "name": "getDealProposal",
       "outputs": [
         {
@@ -256,6 +220,16 @@
               "internalType": "uint64",
               "name": "clientCollateral",
               "type": "uint64"
+            },
+            {
+              "internalType": "string",
+              "name": "version",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes",
+              "name": "params",
+              "type": "bytes"
             }
           ],
           "internalType": "struct DealClient.DealProposal",
@@ -342,6 +316,16 @@
               "internalType": "uint64",
               "name": "clientCollateral",
               "type": "uint64"
+            },
+            {
+              "internalType": "string",
+              "name": "version",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes",
+              "name": "params",
+              "type": "bytes"
             }
           ],
           "internalType": "struct DealClient.DealProposal",
@@ -361,99 +345,6 @@
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "components": [
-            {
-              "internalType": "bytes",
-              "name": "pieceCid",
-              "type": "bytes"
-            },
-            {
-              "internalType": "uint64",
-              "name": "paddedPieceSize",
-              "type": "uint64"
-            },
-            {
-              "internalType": "bool",
-              "name": "verifiedDeal",
-              "type": "bool"
-            },
-            {
-              "internalType": "bytes",
-              "name": "client",
-              "type": "bytes"
-            },
-            {
-              "internalType": "bytes",
-              "name": "label",
-              "type": "bytes"
-            },
-            {
-              "internalType": "uint64",
-              "name": "startEpoch",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "endEpoch",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "storagePricePerEpoch",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "providerCollateral",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "clientCollateral",
-              "type": "uint64"
-            }
-          ],
-          "internalType": "struct DealClient.DealProposal",
-          "name": "_deal",
-          "type": "tuple"
-        },
-        {
-          "components": [
-            {
-              "internalType": "string",
-              "name": "locationRef",
-              "type": "string"
-            },
-            {
-              "internalType": "bool",
-              "name": "removeUnsealedCopy",
-              "type": "bool"
-            },
-            {
-              "internalType": "bool",
-              "name": "skipIPNIAnnounce",
-              "type": "bool"
-            }
-          ],
-          "internalType": "struct DealClient.DealParams",
-          "name": "_dp",
-          "type": "tuple"
-        }
-      ],
-      "name": "makeDealProposalWithParams",
-      "outputs": [
-        {
-          "internalType": "bytes32",
-          "name": "",
-          "type": "bytes32"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [],
       "name": "owner",
       "outputs": [
@@ -461,35 +352,6 @@
           "internalType": "address",
           "name": "",
           "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "",
-          "type": "bytes32"
-        }
-      ],
-      "name": "params",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "locationRef",
-          "type": "string"
-        },
-        {
-          "internalType": "bool",
-          "name": "removeUnsealedCopy",
-          "type": "bool"
-        },
-        {
-          "internalType": "bool",
-          "name": "skipIPNIAnnounce",
-          "type": "bool"
         }
       ],
       "stateMutability": "view",
@@ -554,6 +416,16 @@
           "internalType": "uint64",
           "name": "clientCollateral",
           "type": "uint64"
+        },
+        {
+          "internalType": "string",
+          "name": "version",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes",
+          "name": "params",
+          "type": "bytes"
         }
       ],
       "stateMutability": "view",
@@ -577,5 +449,4 @@
       "stateMutability": "nonpayable",
       "type": "function"
     }
-
 ]
