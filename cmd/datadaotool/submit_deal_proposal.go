@@ -22,10 +22,10 @@ import (
 var (
 	// chain id -- ideally fetch this from chain, but seems like rpc is not supported just yet
 	// testnet
-	//chainId = big.NewInt(31415926)
+	chainId = big.NewInt(31415926)
 
 	// hyperspace
-	chainId = big.NewInt(3141)
+	//chainId = big.NewInt(3141)
 
 	//chainID, err := client.NetworkID(context.Background())
 	//if err != nil {
