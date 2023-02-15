@@ -212,17 +212,17 @@ var submitDealProposalCmd = &cli.Command{
 		// params marshalling
 		paramsRecord := struct {
 			LocationRef      string
-			CarSize          uint64
+			CarSize          *big.Int
 			SkipIpniAnnounce bool
 		}{
 			cctx.String("location_ref"),
-			cctx.Uint64("car-size"),
+			big.NewInt(int64(carFileSize)),
 			cctx.Bool("skip-ipni-announce"),
 		}
 
 		paramsVersion1, _ := ethabi.NewType("tuple", "paramsVersion1", []ethabi.ArgumentMarshaling{
 			{Name: "location_ref", Type: "string"},
-			{Name: "car_size", Type: "int256"},
+			{Name: "car_size", Type: "uint256"},
 			{Name: "skip_ipni_announce", Type: "bool"},
 		})
 
