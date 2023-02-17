@@ -4,11 +4,11 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"fmt"
-	"math/big"
 	"time"
 
+	mbig "math/big"
+
 	"github.com/davecgh/go-spew/spew"
-	ethabi "github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -16,9 +16,10 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/filecoin-project/go-address"
-
+	addr "github.com/filecoin-project/go-address"
+	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/builtin/v8/market"
+	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
 	"github.com/nonsense/fevmtest/dc"
 	"github.com/urfave/cli/v2"
@@ -27,7 +28,7 @@ import (
 var (
 	// chain id -- ideally fetch this from chain, but seems like rpc is not supported just yet
 	// testnet
-	chainId = big.NewInt(31415926)
+	chainId = mbig.NewInt(31415926)
 
 	// hyperspace
 	//chainId = big.NewInt(3141)
@@ -158,8 +159,8 @@ var submitDealProposalCmd = &cli.Command{
 
 		opts := &bind.TransactOpts{
 			From:      me,
-			GasFeeCap: big.NewInt(100000000),
-			GasTipCap: big.NewInt(100000000),
+			GasFeeCap: mbig.NewInt(100000000),
+			GasTipCap: mbig.NewInt(100000000),
 			Signer:    signFn,
 			Nonce:     nil,
 			Value:     nil,
@@ -172,10 +173,11 @@ var submitDealProposalCmd = &cli.Command{
 			return fmt.Errorf("parsing commp '%s': %w", commp, err)
 		}
 
-		pieceSize := cctx.Uint64("piece-size")
-		if pieceSize == 0 {
+		ps := cctx.Uint64("piece-size")
+		if ps == 0 {
 			return fmt.Errorf("must provide piece-size parameter for CAR url")
 		}
+		pieceSize := abi.PaddedPieceSize(ps)
 
 		payloadCidStr := cctx.String("payload-cid")
 		rootCid, err := cid.Parse(payloadCidStr)
@@ -194,66 +196,54 @@ var submitDealProposalCmd = &cli.Command{
 
 		startEpoch := head + abi.ChainEpoch(5760)
 		endEpoch := startEpoch + 521280 // startEpoch + 181 days
-		l, err := market.NewLabelFromBytes(rootCid.Bytes())
+		l, err := NewLabelFromString(rootCid.String())
 		if err != nil {
 			return fmt.Errorf("new label err: %w", err)
-		}
-		lbytes, err := l.ToBytes()
-		if err != nil {
-			return fmt.Errorf("label to string err: %w", err)
 		}
 
 		clientAddr, err := address.NewFromString(cctx.String("client")) // i guess the f4 address to the contract that should verify the deal?
 		if err != nil {
 			return err
 		}
-		providerCollateral := uint64(0)
+		providerCollateral := abi.NewTokenAmount(cctx.Int64("provider-collateral"))
 
-		// params marshalling
-		paramsRecord := struct {
-			LocationRef      string
-			CarSize          *big.Int
-			SkipIpniAnnounce bool
-		}{
-			cctx.String("location_ref"),
-			big.NewInt(int64(carFileSize)),
-			cctx.Bool("skip-ipni-announce"),
+		//storagePrice := abi.NewTokenAmount(cctx.Int64("storage-price"))
+		//storagePricePerEpochForDeal := big.Div(big.Mul(big.NewInt(int64(pieceSize)), storagePrice), big.NewInt(int64(1<<30)))
+
+		paramsV1Cbor := ParamsVersion1{
+			LocationRef:      cctx.String("location_ref"),
+			CarSize:          carFileSize,
+			SkipIpniAnnounce: cctx.Bool("skip-ipni-announce"),
 		}
 
-		paramsVersion1, _ := ethabi.NewType("tuple", "paramsVersion1", []ethabi.ArgumentMarshaling{
-			{Name: "location_ref", Type: "string"},
-			{Name: "car_size", Type: "uint256"},
-			{Name: "skip_ipni_announce", Type: "bool"},
-		})
-
-		params, err := ethabi.Arguments{
-			{Type: paramsVersion1, Name: "paramsVersion1"},
-		}.Pack(&paramsRecord)
+		params, err := cborutil.Dump(&paramsV1Cbor)
 		if err != nil {
 			return err
 		}
 
-		spew.Dump(params)
-
-		dealProposal := dc.DealClientDealProposal{
-			PieceCid:        pieceCid.Bytes(),
-			PaddedPieceSize: pieceSize,
-			VerifiedDeal:    false,
-			Client:          clientAddr.Bytes(),
-			// note that there is no Provider,
-			Label:                lbytes,
-			StartEpoch:           uint64(startEpoch),
-			EndEpoch:             uint64(endEpoch),
-			StoragePricePerEpoch: cctx.Uint64("storage-price"),
+		proposalCbor := DealProposalCbor{
+			PieceCID:     pieceCid,
+			PieceSize:    pieceSize,
+			VerifiedDeal: false,
+			Client:       clientAddr,
+			Label:        l,
+			StartEpoch:   startEpoch,
+			EndEpoch:     endEpoch,
+			//StoragePricePerEpoch: storagePricePerEpochForDeal,
+			StoragePricePerEpoch: big.NewInt(0),
 			ProviderCollateral:   providerCollateral,
-			ClientCollateral:     0,
 			Version:              cctx.String("version"),
 			Params:               params,
 		}
 
-		tx, err := dealclient.MakeDealProposal(opts, dealProposal)
+		buf, err := cborutil.Dump(&proposalCbor)
 		if err != nil {
-			panic(err)
+			return err
+		}
+
+		tx, err := dealclient.MakeDealProposal(opts, buf)
+		if err != nil {
+			return err
 		}
 
 		fmt.Println()
@@ -264,11 +254,48 @@ var submitDealProposalCmd = &cli.Command{
 		hash := tx.Hash()
 		receipt, err := client.TransactionReceipt(context.Background(), hash)
 		if err != nil {
-			panic(err)
+			return err
 		}
 
 		spew.Dump(receipt)
 
 		return nil
 	},
+}
+
+type DealProposalCbor struct {
+	PieceCID     cid.Cid `checked:"true"` // Checked in validateDeal, CommP
+	PieceSize    abi.PaddedPieceSize
+	VerifiedDeal bool
+	Client       addr.Address
+
+	Label DealLabel
+
+	StartEpoch           abi.ChainEpoch
+	EndEpoch             abi.ChainEpoch
+	StoragePricePerEpoch abi.TokenAmount
+
+	ProviderCollateral abi.TokenAmount
+	ClientCollateral   abi.TokenAmount
+
+	Version string
+	Params  []byte
+}
+
+type ParamsVersion1 struct {
+	LocationRef      string
+	CarSize          uint64
+	SkipIpniAnnounce bool
+}
+
+type DealLabel struct {
+	bs        []byte
+	notString bool
+}
+
+func NewLabelFromString(s string) (DealLabel, error) {
+	return DealLabel{
+		bs:        []byte(s),
+		notString: false,
+	}, nil
 }
