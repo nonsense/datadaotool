@@ -16,12 +16,12 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/filecoin-project/go-address"
-	addr "github.com/filecoin-project/go-address"
 	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
 	"github.com/nonsense/fevmtest/dc"
+	ftypes "github.com/nonsense/fevmtest/types"
 	"github.com/urfave/cli/v2"
 )
 
@@ -180,7 +180,7 @@ var submitDealProposalCmd = &cli.Command{
 		pieceSize := abi.PaddedPieceSize(ps)
 
 		payloadCidStr := cctx.String("payload-cid")
-		rootCid, err := cid.Parse(payloadCidStr)
+		_, err = cid.Parse(payloadCidStr)
 		if err != nil {
 			return fmt.Errorf("parsing payload cid %s: %w", payloadCidStr, err)
 		}
@@ -196,7 +196,7 @@ var submitDealProposalCmd = &cli.Command{
 
 		startEpoch := head + abi.ChainEpoch(5760)
 		endEpoch := startEpoch + 521280 // startEpoch + 181 days
-		l, err := NewLabelFromString(rootCid.String())
+		l, err := ftypes.NewLabelFromString(payloadCidStr)
 		if err != nil {
 			return fmt.Errorf("new label err: %w", err)
 		}
@@ -210,7 +210,7 @@ var submitDealProposalCmd = &cli.Command{
 		//storagePrice := abi.NewTokenAmount(cctx.Int64("storage-price"))
 		//storagePricePerEpochForDeal := big.Div(big.Mul(big.NewInt(int64(pieceSize)), storagePrice), big.NewInt(int64(1<<30)))
 
-		paramsV1Cbor := ParamsVersion1{
+		paramsV1Cbor := ftypes.ParamsVersion1{
 			LocationRef:      cctx.String("location_ref"),
 			CarSize:          carFileSize,
 			SkipIpniAnnounce: cctx.Bool("skip-ipni-announce"),
@@ -221,7 +221,9 @@ var submitDealProposalCmd = &cli.Command{
 			return err
 		}
 
-		proposalCbor := DealProposalCbor{
+		spew.Dump(l)
+
+		proposalCbor := ftypes.DealProposalCbor{
 			PieceCID:     pieceCid,
 			PieceSize:    pieceSize,
 			VerifiedDeal: false,
@@ -240,6 +242,10 @@ var submitDealProposalCmd = &cli.Command{
 		if err != nil {
 			return err
 		}
+
+		spew.Dump(buf)
+
+		spew.Dump("len:", len(buf))
 
 		tx, err := dealclient.MakeDealProposal(opts, buf)
 		if err != nil {
@@ -261,41 +267,4 @@ var submitDealProposalCmd = &cli.Command{
 
 		return nil
 	},
-}
-
-type DealProposalCbor struct {
-	PieceCID     cid.Cid `checked:"true"` // Checked in validateDeal, CommP
-	PieceSize    abi.PaddedPieceSize
-	VerifiedDeal bool
-	Client       addr.Address
-
-	Label DealLabel
-
-	StartEpoch           abi.ChainEpoch
-	EndEpoch             abi.ChainEpoch
-	StoragePricePerEpoch abi.TokenAmount
-
-	ProviderCollateral abi.TokenAmount
-	ClientCollateral   abi.TokenAmount
-
-	Version string
-	Params  []byte
-}
-
-type ParamsVersion1 struct {
-	LocationRef      string
-	CarSize          uint64
-	SkipIpniAnnounce bool
-}
-
-type DealLabel struct {
-	bs        []byte
-	notString bool
-}
-
-func NewLabelFromString(s string) (DealLabel, error) {
-	return DealLabel{
-		bs:        []byte(s),
-		notString: false,
-	}, nil
 }
