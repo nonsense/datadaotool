@@ -30,7 +30,7 @@ var (
 
 // DealClientMetaData contains all meta data concerning the DealClient contract.
 var DealClientMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"DealProposalCreate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"received\",\"type\":\"string\"}],\"name\":\"ReceivedDataCap\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"AUTHORIZE_MESSAGE_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DATACAP_RECEIVER_HOOK_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"addCID\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"provider\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"authorizeData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidProviders\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSet\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSizes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getDealProposal\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"method\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"name\":\"handle_filecoin_method\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_deal\",\"type\":\"bytes\"}],\"name\":\"makeDealProposal\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"proposals\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"raw_auth_params\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"callee\",\"type\":\"address\"}],\"name\":\"publish_deal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"size\",\"type\":\"bytes\"},{\"indexed\":true,\"internalType\":\"bool\",\"name\":\"verified\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"DealProposalCreate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"received\",\"type\":\"string\"}],\"name\":\"ReceivedDataCap\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"AUTHORIZE_MESSAGE_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DATACAP_RECEIVER_HOOK_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"addCID\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"provider\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"authorizeData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidProviders\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSet\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSizes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getDealProposal\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"method\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"name\":\"handle_filecoin_method\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_deal\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"size\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"verified\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"makeDealProposal\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"proposals\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"raw_auth_params\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"callee\",\"type\":\"address\"}],\"name\":\"publish_deal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // DealClientABI is the input ABI used to generate the binding from.
@@ -490,25 +490,25 @@ func (_DealClient *DealClientTransactorSession) HandleFilecoinMethod(method uint
 	return _DealClient.Contract.HandleFilecoinMethod(&_DealClient.TransactOpts, method, arg1, params)
 }
 
-// MakeDealProposal is a paid mutator transaction binding the contract method 0x5abba064.
+// MakeDealProposal is a paid mutator transaction binding the contract method 0xd5d9fcbc.
 //
-// Solidity: function makeDealProposal(bytes _deal) returns(bytes32)
-func (_DealClient *DealClientTransactor) MakeDealProposal(opts *bind.TransactOpts, _deal []byte) (*types.Transaction, error) {
-	return _DealClient.contract.Transact(opts, "makeDealProposal", _deal)
+// Solidity: function makeDealProposal(bytes _deal, bytes size, bool verified, uint256 price) returns(bytes32)
+func (_DealClient *DealClientTransactor) MakeDealProposal(opts *bind.TransactOpts, _deal []byte, size []byte, verified bool, price *big.Int) (*types.Transaction, error) {
+	return _DealClient.contract.Transact(opts, "makeDealProposal", _deal, size, verified, price)
 }
 
-// MakeDealProposal is a paid mutator transaction binding the contract method 0x5abba064.
+// MakeDealProposal is a paid mutator transaction binding the contract method 0xd5d9fcbc.
 //
-// Solidity: function makeDealProposal(bytes _deal) returns(bytes32)
-func (_DealClient *DealClientSession) MakeDealProposal(_deal []byte) (*types.Transaction, error) {
-	return _DealClient.Contract.MakeDealProposal(&_DealClient.TransactOpts, _deal)
+// Solidity: function makeDealProposal(bytes _deal, bytes size, bool verified, uint256 price) returns(bytes32)
+func (_DealClient *DealClientSession) MakeDealProposal(_deal []byte, size []byte, verified bool, price *big.Int) (*types.Transaction, error) {
+	return _DealClient.Contract.MakeDealProposal(&_DealClient.TransactOpts, _deal, size, verified, price)
 }
 
-// MakeDealProposal is a paid mutator transaction binding the contract method 0x5abba064.
+// MakeDealProposal is a paid mutator transaction binding the contract method 0xd5d9fcbc.
 //
-// Solidity: function makeDealProposal(bytes _deal) returns(bytes32)
-func (_DealClient *DealClientTransactorSession) MakeDealProposal(_deal []byte) (*types.Transaction, error) {
-	return _DealClient.Contract.MakeDealProposal(&_DealClient.TransactOpts, _deal)
+// Solidity: function makeDealProposal(bytes _deal, bytes size, bool verified, uint256 price) returns(bytes32)
+func (_DealClient *DealClientTransactorSession) MakeDealProposal(_deal []byte, size []byte, verified bool, price *big.Int) (*types.Transaction, error) {
+	return _DealClient.Contract.MakeDealProposal(&_DealClient.TransactOpts, _deal, size, verified, price)
 }
 
 // PublishDeal is a paid mutator transaction binding the contract method 0xd75fb3c8.
@@ -601,38 +601,51 @@ func (it *DealClientDealProposalCreateIterator) Close() error {
 
 // DealClientDealProposalCreate represents a DealProposalCreate event raised by the DealClient contract.
 type DealClientDealProposalCreate struct {
-	Id  [32]byte
-	Raw types.Log // Blockchain specific contextual infos
+	Id       [32]byte
+	Size     []byte
+	Verified bool
+	Price    *big.Int
+	Raw      types.Log // Blockchain specific contextual infos
 }
 
-// FilterDealProposalCreate is a free log retrieval operation binding the contract event 0xc15e53e899e372ce2933436c5b2c22ed67a40809a9d557a7846a6104fea03972.
+// FilterDealProposalCreate is a free log retrieval operation binding the contract event 0xcb1b250d5531af7aa459e35092109f17b54741e473b86c2b755ca686f10a5833.
 //
-// Solidity: event DealProposalCreate(bytes32 indexed id)
-func (_DealClient *DealClientFilterer) FilterDealProposalCreate(opts *bind.FilterOpts, id [][32]byte) (*DealClientDealProposalCreateIterator, error) {
+// Solidity: event DealProposalCreate(bytes32 indexed id, bytes size, bool indexed verified, uint256 price)
+func (_DealClient *DealClientFilterer) FilterDealProposalCreate(opts *bind.FilterOpts, id [][32]byte, verified []bool) (*DealClientDealProposalCreateIterator, error) {
 
 	var idRule []interface{}
 	for _, idItem := range id {
 		idRule = append(idRule, idItem)
 	}
 
-	logs, sub, err := _DealClient.contract.FilterLogs(opts, "DealProposalCreate", idRule)
+	var verifiedRule []interface{}
+	for _, verifiedItem := range verified {
+		verifiedRule = append(verifiedRule, verifiedItem)
+	}
+
+	logs, sub, err := _DealClient.contract.FilterLogs(opts, "DealProposalCreate", idRule, verifiedRule)
 	if err != nil {
 		return nil, err
 	}
 	return &DealClientDealProposalCreateIterator{contract: _DealClient.contract, event: "DealProposalCreate", logs: logs, sub: sub}, nil
 }
 
-// WatchDealProposalCreate is a free log subscription operation binding the contract event 0xc15e53e899e372ce2933436c5b2c22ed67a40809a9d557a7846a6104fea03972.
+// WatchDealProposalCreate is a free log subscription operation binding the contract event 0xcb1b250d5531af7aa459e35092109f17b54741e473b86c2b755ca686f10a5833.
 //
-// Solidity: event DealProposalCreate(bytes32 indexed id)
-func (_DealClient *DealClientFilterer) WatchDealProposalCreate(opts *bind.WatchOpts, sink chan<- *DealClientDealProposalCreate, id [][32]byte) (event.Subscription, error) {
+// Solidity: event DealProposalCreate(bytes32 indexed id, bytes size, bool indexed verified, uint256 price)
+func (_DealClient *DealClientFilterer) WatchDealProposalCreate(opts *bind.WatchOpts, sink chan<- *DealClientDealProposalCreate, id [][32]byte, verified []bool) (event.Subscription, error) {
 
 	var idRule []interface{}
 	for _, idItem := range id {
 		idRule = append(idRule, idItem)
 	}
 
-	logs, sub, err := _DealClient.contract.WatchLogs(opts, "DealProposalCreate", idRule)
+	var verifiedRule []interface{}
+	for _, verifiedItem := range verified {
+		verifiedRule = append(verifiedRule, verifiedItem)
+	}
+
+	logs, sub, err := _DealClient.contract.WatchLogs(opts, "DealProposalCreate", idRule, verifiedRule)
 	if err != nil {
 		return nil, err
 	}
@@ -664,9 +677,9 @@ func (_DealClient *DealClientFilterer) WatchDealProposalCreate(opts *bind.WatchO
 	}), nil
 }
 
-// ParseDealProposalCreate is a log parse operation binding the contract event 0xc15e53e899e372ce2933436c5b2c22ed67a40809a9d557a7846a6104fea03972.
+// ParseDealProposalCreate is a log parse operation binding the contract event 0xcb1b250d5531af7aa459e35092109f17b54741e473b86c2b755ca686f10a5833.
 //
-// Solidity: event DealProposalCreate(bytes32 indexed id)
+// Solidity: event DealProposalCreate(bytes32 indexed id, bytes size, bool indexed verified, uint256 price)
 func (_DealClient *DealClientFilterer) ParseDealProposalCreate(log types.Log) (*DealClientDealProposalCreate, error) {
 	event := new(DealClientDealProposalCreate)
 	if err := _DealClient.contract.UnpackLog(event, "DealProposalCreate", log); err != nil {

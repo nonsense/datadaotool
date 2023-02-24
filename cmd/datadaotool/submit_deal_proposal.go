@@ -247,7 +247,7 @@ var submitDealProposalCmd = &cli.Command{
 
 		spew.Dump("len:", len(buf))
 
-		tx, err := dealclient.MakeDealProposal(opts, buf)
+		tx, err := dealclient.MakeDealProposal(opts, buf, []byte(``), true, mbig.NewInt(1))
 		if err != nil {
 			return err
 		}

@@ -12,6 +12,24 @@
           "internalType": "bytes32",
           "name": "id",
           "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "size",
+          "type": "bytes"
+        },
+        {
+          "indexed": true,
+          "internalType": "bool",
+          "name": "verified",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
         }
       ],
       "name": "DealProposalCreate",
@@ -207,6 +225,21 @@
           "internalType": "bytes",
           "name": "_deal",
           "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "size",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bool",
+          "name": "verified",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
         }
       ],
       "name": "makeDealProposal",
