@@ -28,7 +28,9 @@ import (
 var (
 	// chain id -- ideally fetch this from chain, but seems like rpc is not supported just yet
 	// testnet
-	chainId = mbig.NewInt(31415926)
+	//chainId = mbig.NewInt(31415926)
+
+	chainId *mbig.Int
 
 	// hyperspace
 	//chainId = big.NewInt(3141)
@@ -68,10 +70,10 @@ var submitDealProposalCmd = &cli.Command{
 			Usage:    "root CID of the CAR file",
 			Required: true,
 		},
-		&cli.IntFlag{
-			Name:        "start-epoch",
-			Usage:       "start epoch by when the deal should be proved by provider on-chain",
-			DefaultText: "current chain head + 2 days",
+		&cli.Int64Flag{
+			Name:     "start-epoch",
+			Usage:    "start epoch by when the deal should be proved by provider on-chain",
+			Required: true,
 		},
 		&cli.Uint64Flag{
 			Name:  "duration",
@@ -122,9 +124,16 @@ var submitDealProposalCmd = &cli.Command{
 			Usage: "",
 			Value: "http://webserver.com/carfile.car",
 		},
+		&cli.Int64Flag{
+			Name:  "chain-id",
+			Usage: "network id",
+			Value: 3141,
+		},
 	},
 	Action: func(cctx *cli.Context) error {
 		endpoint := cctx.String("endpoint")
+
+		chainId = mbig.NewInt(cctx.Int64("chain-id"))
 
 		cl, err := rpc.Dial(endpoint)
 		if err != nil {
@@ -195,11 +204,7 @@ var submitDealProposalCmd = &cli.Command{
 			return fmt.Errorf("size of car file cannot be 0")
 		}
 
-		//head := tipset.Height()
-
-		head := abi.ChainEpoch(0)
-
-		startEpoch := head + abi.ChainEpoch(50000)
+		startEpoch := abi.ChainEpoch(cctx.Int64("start-epoch"))
 		endEpoch := startEpoch + abi.ChainEpoch(duration) // startEpoch + 181 days
 		l, err := ftypes.NewLabelFromString(payloadCidStr)
 		if err != nil {
@@ -260,7 +265,7 @@ var submitDealProposalCmd = &cli.Command{
 		fmt.Println()
 		fmt.Println(tx.Hash())
 
-		time.Sleep(15 * time.Second)
+		time.Sleep(60 * time.Second)
 
 		hash := tx.Hash()
 		receipt, err := client.TransactionReceipt(context.Background(), hash)
