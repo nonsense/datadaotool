@@ -10,18 +10,13 @@ import (
 var log = logging.Logger("datadaotool")
 
 func main() {
-	//lotuslog.SetupLogLevels()
-
 	local := []*cli.Command{
-		getDealCmd,
 		submitDealProposalCmd,
-		//		eventsMonitorCmd,
 	}
 
 	app := &cli.App{
 		Name:  "datadaotool",
 		Usage: "",
-		//Version: build.UserVersion(),
 		Flags: []cli.Flag{
 			&cli.StringFlag{
 				Name:    "repo",
@@ -36,13 +31,6 @@ func main() {
 			&cli.StringFlag{
 				Name:  "endpoint",
 				Value: "http://localhost:1234/rpc/v1",
-				//Value: "ws://api.hyperspace.node.glif.io/rpc/v1",
-				//Value: "wss://wss.hyperspace.node.glif.io/apigw/lotus",
-
-				//Value: "wss://wss.hyperspace.node.glif.io/rpc/v1",
-				//Value: "https://api.hyperspace.node.glif.io/rpc/v1",
-
-				//Value: "wss://wss.hyperspace.node.glif.io/apigw/lotus/rpc/v0",
 			},
 			&cli.StringFlag{
 				Name:  "token",
