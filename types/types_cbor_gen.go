@@ -224,7 +224,7 @@ func (t *DealProposalCbor) UnmarshalCBOR(r io.Reader) (err error) {
 		case cbg.MajNegativeInt:
 			extraI = int64(extra)
 			if extraI < 0 {
-				return fmt.Errorf("int64 negative oveflow")
+				return fmt.Errorf("int64 negative overflow")
 			}
 			extraI = -1 - extraI
 		default:
@@ -249,7 +249,7 @@ func (t *DealProposalCbor) UnmarshalCBOR(r io.Reader) (err error) {
 		case cbg.MajNegativeInt:
 			extraI = int64(extra)
 			if extraI < 0 {
-				return fmt.Errorf("int64 negative oveflow")
+				return fmt.Errorf("int64 negative overflow")
 			}
 			extraI = -1 - extraI
 		default:
@@ -319,7 +319,7 @@ func (t *DealProposalCbor) UnmarshalCBOR(r io.Reader) (err error) {
 	return nil
 }
 
-var lengthBufParamsVersion1 = []byte{131}
+var lengthBufParamsVersion1 = []byte{132}
 
 func (t *ParamsVersion1) MarshalCBOR(w io.Writer) error {
 	if t == nil {
@@ -355,6 +355,11 @@ func (t *ParamsVersion1) MarshalCBOR(w io.Writer) error {
 	if err := cbg.WriteBool(w, t.SkipIpniAnnounce); err != nil {
 		return err
 	}
+
+	// t.RemoveUnsealedCopy (bool) (bool)
+	if err := cbg.WriteBool(w, t.RemoveUnsealedCopy); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -377,7 +382,7 @@ func (t *ParamsVersion1) UnmarshalCBOR(r io.Reader) (err error) {
 		return fmt.Errorf("cbor input should be of type array")
 	}
 
-	if extra != 3 {
+	if extra != 4 {
 		return fmt.Errorf("cbor input had wrong number of fields")
 	}
 
@@ -419,6 +424,23 @@ func (t *ParamsVersion1) UnmarshalCBOR(r io.Reader) (err error) {
 		t.SkipIpniAnnounce = false
 	case 21:
 		t.SkipIpniAnnounce = true
+	default:
+		return fmt.Errorf("booleans are either major type 7, value 20 or 21 (got %d)", extra)
+	}
+	// t.RemoveUnsealedCopy (bool) (bool)
+
+	maj, extra, err = cr.ReadHeader()
+	if err != nil {
+		return err
+	}
+	if maj != cbg.MajOther {
+		return fmt.Errorf("booleans must be major type 7")
+	}
+	switch extra {
+	case 20:
+		t.RemoveUnsealedCopy = false
+	case 21:
+		t.RemoveUnsealedCopy = true
 	default:
 		return fmt.Errorf("booleans are either major type 7, value 20 or 21 (got %d)", extra)
 	}

@@ -20,6 +20,7 @@ type DealProposalCbor struct {
 	PieceSize    abi.PaddedPieceSize
 	VerifiedDeal bool
 	Client       address.Address
+	//Provider     string
 
 	Label DealLabel
 
@@ -35,9 +36,10 @@ type DealProposalCbor struct {
 }
 
 type ParamsVersion1 struct {
-	LocationRef      string
-	CarSize          uint64
-	SkipIpniAnnounce bool
+	LocationRef        string
+	CarSize            uint64
+	SkipIpniAnnounce   bool
+	RemoveUnsealedCopy bool
 }
 
 type DealLabel struct {

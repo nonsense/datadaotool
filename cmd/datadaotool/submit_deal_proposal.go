@@ -73,7 +73,7 @@ var submitDealProposalCmd = &cli.Command{
 			Usage:       "start epoch by when the deal should be proved by provider on-chain",
 			DefaultText: "current chain head + 2 days",
 		},
-		&cli.IntFlag{
+		&cli.Uint64Flag{
 			Name:  "duration",
 			Usage: "duration of the deal in epochs",
 			Value: 518400, // default is 2880 * 180 == 180 days
@@ -190,12 +190,17 @@ var submitDealProposalCmd = &cli.Command{
 			return fmt.Errorf("size of car file cannot be 0")
 		}
 
+		duration := cctx.Uint64("duration")
+		if duration == 0 {
+			return fmt.Errorf("size of car file cannot be 0")
+		}
+
 		//head := tipset.Height()
 
 		head := abi.ChainEpoch(0)
 
-		startEpoch := head + abi.ChainEpoch(5760)
-		endEpoch := startEpoch + 521280 // startEpoch + 181 days
+		startEpoch := head + abi.ChainEpoch(50000)
+		endEpoch := startEpoch + abi.ChainEpoch(duration) // startEpoch + 181 days
 		l, err := ftypes.NewLabelFromString(payloadCidStr)
 		if err != nil {
 			return fmt.Errorf("new label err: %w", err)
@@ -247,7 +252,7 @@ var submitDealProposalCmd = &cli.Command{
 
 		spew.Dump("len:", len(buf))
 
-		tx, err := dealclient.MakeDealProposal(opts, buf, []byte(``), true, mbig.NewInt(1))
+		tx, err := dealclient.MakeDealProposal(opts, buf)
 		if err != nil {
 			return err
 		}

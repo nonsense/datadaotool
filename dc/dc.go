@@ -30,7 +30,7 @@ var (
 
 // DealClientMetaData contains all meta data concerning the DealClient contract.
 var DealClientMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"size\",\"type\":\"bytes\"},{\"indexed\":true,\"internalType\":\"bool\",\"name\":\"verified\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"DealProposalCreate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"received\",\"type\":\"string\"}],\"name\":\"ReceivedDataCap\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"AUTHORIZE_MESSAGE_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DATACAP_RECEIVER_HOOK_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"addCID\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"cidraw\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"provider\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"size\",\"type\":\"uint256\"}],\"name\":\"authorizeData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidProviders\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSet\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"cidSizes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"getDealProposal\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"method\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"name\":\"handle_filecoin_method\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_deal\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"size\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"verified\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"makeDealProposal\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"proposals\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"raw_auth_params\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"callee\",\"type\":\"address\"}],\"name\":\"publish_deal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"size\",\"type\":\"uint64\"},{\"indexed\":true,\"internalType\":\"bool\",\"name\":\"verified\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"DealProposalCreate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"received\",\"type\":\"string\"}],\"name\":\"ReceivedDataCap\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"AUTHENTICATE_MESSAGE_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DATACAP_RECEIVER_HOOK_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MARKET_NOTIFY_DEAL_METHOD_NUM\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"addBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"dealProposals\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"proposalId\",\"type\":\"bytes32\"}],\"name\":\"getDealProposal\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"method\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"params\",\"type\":\"bytes\"}],\"name\":\"handle_filecoin_method\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"deal\",\"type\":\"bytes\"}],\"name\":\"makeDealProposal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"pieceDeals\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"pieceProviders\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"provider\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"pieceToProposal\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"proposalId\",\"type\":\"bytes32\"},{\"internalType\":\"bool\",\"name\":\"valid\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"pieceCid\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"pieceSize\",\"type\":\"uint64\"}],\"name\":\"simpleDealProposal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"client\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"withdrawBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // DealClientABI is the input ABI used to generate the binding from.
@@ -179,12 +179,12 @@ func (_DealClient *DealClientTransactorRaw) Transact(opts *bind.TransactOpts, me
 	return _DealClient.Contract.contract.Transact(opts, method, params...)
 }
 
-// AUTHORIZEMESSAGEMETHODNUM is a free data retrieval call binding the contract method 0xc3bd579b.
+// AUTHENTICATEMESSAGEMETHODNUM is a free data retrieval call binding the contract method 0x00706790.
 //
-// Solidity: function AUTHORIZE_MESSAGE_METHOD_NUM() view returns(uint64)
-func (_DealClient *DealClientCaller) AUTHORIZEMESSAGEMETHODNUM(opts *bind.CallOpts) (uint64, error) {
+// Solidity: function AUTHENTICATE_MESSAGE_METHOD_NUM() view returns(uint64)
+func (_DealClient *DealClientCaller) AUTHENTICATEMESSAGEMETHODNUM(opts *bind.CallOpts) (uint64, error) {
 	var out []interface{}
-	err := _DealClient.contract.Call(opts, &out, "AUTHORIZE_MESSAGE_METHOD_NUM")
+	err := _DealClient.contract.Call(opts, &out, "AUTHENTICATE_MESSAGE_METHOD_NUM")
 
 	if err != nil {
 		return *new(uint64), err
@@ -196,18 +196,18 @@ func (_DealClient *DealClientCaller) AUTHORIZEMESSAGEMETHODNUM(opts *bind.CallOp
 
 }
 
-// AUTHORIZEMESSAGEMETHODNUM is a free data retrieval call binding the contract method 0xc3bd579b.
+// AUTHENTICATEMESSAGEMETHODNUM is a free data retrieval call binding the contract method 0x00706790.
 //
-// Solidity: function AUTHORIZE_MESSAGE_METHOD_NUM() view returns(uint64)
-func (_DealClient *DealClientSession) AUTHORIZEMESSAGEMETHODNUM() (uint64, error) {
-	return _DealClient.Contract.AUTHORIZEMESSAGEMETHODNUM(&_DealClient.CallOpts)
+// Solidity: function AUTHENTICATE_MESSAGE_METHOD_NUM() view returns(uint64)
+func (_DealClient *DealClientSession) AUTHENTICATEMESSAGEMETHODNUM() (uint64, error) {
+	return _DealClient.Contract.AUTHENTICATEMESSAGEMETHODNUM(&_DealClient.CallOpts)
 }
 
-// AUTHORIZEMESSAGEMETHODNUM is a free data retrieval call binding the contract method 0xc3bd579b.
+// AUTHENTICATEMESSAGEMETHODNUM is a free data retrieval call binding the contract method 0x00706790.
 //
-// Solidity: function AUTHORIZE_MESSAGE_METHOD_NUM() view returns(uint64)
-func (_DealClient *DealClientCallerSession) AUTHORIZEMESSAGEMETHODNUM() (uint64, error) {
-	return _DealClient.Contract.AUTHORIZEMESSAGEMETHODNUM(&_DealClient.CallOpts)
+// Solidity: function AUTHENTICATE_MESSAGE_METHOD_NUM() view returns(uint64)
+func (_DealClient *DealClientCallerSession) AUTHENTICATEMESSAGEMETHODNUM() (uint64, error) {
+	return _DealClient.Contract.AUTHENTICATEMESSAGEMETHODNUM(&_DealClient.CallOpts)
 }
 
 // DATACAPRECEIVERHOOKMETHODNUM is a free data retrieval call binding the contract method 0xb34ba252.
@@ -241,105 +241,74 @@ func (_DealClient *DealClientCallerSession) DATACAPRECEIVERHOOKMETHODNUM() (uint
 	return _DealClient.Contract.DATACAPRECEIVERHOOKMETHODNUM(&_DealClient.CallOpts)
 }
 
-// CidProviders is a free data retrieval call binding the contract method 0x6fc6a748.
+// MARKETNOTIFYDEALMETHODNUM is a free data retrieval call binding the contract method 0x6067f454.
 //
-// Solidity: function cidProviders(bytes , bytes ) view returns(bool)
-func (_DealClient *DealClientCaller) CidProviders(opts *bind.CallOpts, arg0 []byte, arg1 []byte) (bool, error) {
+// Solidity: function MARKET_NOTIFY_DEAL_METHOD_NUM() view returns(uint64)
+func (_DealClient *DealClientCaller) MARKETNOTIFYDEALMETHODNUM(opts *bind.CallOpts) (uint64, error) {
 	var out []interface{}
-	err := _DealClient.contract.Call(opts, &out, "cidProviders", arg0, arg1)
+	err := _DealClient.contract.Call(opts, &out, "MARKET_NOTIFY_DEAL_METHOD_NUM")
 
 	if err != nil {
-		return *new(bool), err
+		return *new(uint64), err
 	}
 
-	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+	out0 := *abi.ConvertType(out[0], new(uint64)).(*uint64)
 
 	return out0, err
 
 }
 
-// CidProviders is a free data retrieval call binding the contract method 0x6fc6a748.
+// MARKETNOTIFYDEALMETHODNUM is a free data retrieval call binding the contract method 0x6067f454.
 //
-// Solidity: function cidProviders(bytes , bytes ) view returns(bool)
-func (_DealClient *DealClientSession) CidProviders(arg0 []byte, arg1 []byte) (bool, error) {
-	return _DealClient.Contract.CidProviders(&_DealClient.CallOpts, arg0, arg1)
+// Solidity: function MARKET_NOTIFY_DEAL_METHOD_NUM() view returns(uint64)
+func (_DealClient *DealClientSession) MARKETNOTIFYDEALMETHODNUM() (uint64, error) {
+	return _DealClient.Contract.MARKETNOTIFYDEALMETHODNUM(&_DealClient.CallOpts)
 }
 
-// CidProviders is a free data retrieval call binding the contract method 0x6fc6a748.
+// MARKETNOTIFYDEALMETHODNUM is a free data retrieval call binding the contract method 0x6067f454.
 //
-// Solidity: function cidProviders(bytes , bytes ) view returns(bool)
-func (_DealClient *DealClientCallerSession) CidProviders(arg0 []byte, arg1 []byte) (bool, error) {
-	return _DealClient.Contract.CidProviders(&_DealClient.CallOpts, arg0, arg1)
+// Solidity: function MARKET_NOTIFY_DEAL_METHOD_NUM() view returns(uint64)
+func (_DealClient *DealClientCallerSession) MARKETNOTIFYDEALMETHODNUM() (uint64, error) {
+	return _DealClient.Contract.MARKETNOTIFYDEALMETHODNUM(&_DealClient.CallOpts)
 }
 
-// CidSet is a free data retrieval call binding the contract method 0x3d7650b2.
+// DealProposals is a free data retrieval call binding the contract method 0x74112d66.
 //
-// Solidity: function cidSet(bytes ) view returns(bool)
-func (_DealClient *DealClientCaller) CidSet(opts *bind.CallOpts, arg0 []byte) (bool, error) {
+// Solidity: function dealProposals(bytes32 ) view returns(bytes)
+func (_DealClient *DealClientCaller) DealProposals(opts *bind.CallOpts, arg0 [32]byte) ([]byte, error) {
 	var out []interface{}
-	err := _DealClient.contract.Call(opts, &out, "cidSet", arg0)
+	err := _DealClient.contract.Call(opts, &out, "dealProposals", arg0)
 
 	if err != nil {
-		return *new(bool), err
+		return *new([]byte), err
 	}
 
-	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+	out0 := *abi.ConvertType(out[0], new([]byte)).(*[]byte)
 
 	return out0, err
 
 }
 
-// CidSet is a free data retrieval call binding the contract method 0x3d7650b2.
+// DealProposals is a free data retrieval call binding the contract method 0x74112d66.
 //
-// Solidity: function cidSet(bytes ) view returns(bool)
-func (_DealClient *DealClientSession) CidSet(arg0 []byte) (bool, error) {
-	return _DealClient.Contract.CidSet(&_DealClient.CallOpts, arg0)
+// Solidity: function dealProposals(bytes32 ) view returns(bytes)
+func (_DealClient *DealClientSession) DealProposals(arg0 [32]byte) ([]byte, error) {
+	return _DealClient.Contract.DealProposals(&_DealClient.CallOpts, arg0)
 }
 
-// CidSet is a free data retrieval call binding the contract method 0x3d7650b2.
+// DealProposals is a free data retrieval call binding the contract method 0x74112d66.
 //
-// Solidity: function cidSet(bytes ) view returns(bool)
-func (_DealClient *DealClientCallerSession) CidSet(arg0 []byte) (bool, error) {
-	return _DealClient.Contract.CidSet(&_DealClient.CallOpts, arg0)
-}
-
-// CidSizes is a free data retrieval call binding the contract method 0x8f8a6d8f.
-//
-// Solidity: function cidSizes(bytes ) view returns(uint256)
-func (_DealClient *DealClientCaller) CidSizes(opts *bind.CallOpts, arg0 []byte) (*big.Int, error) {
-	var out []interface{}
-	err := _DealClient.contract.Call(opts, &out, "cidSizes", arg0)
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// CidSizes is a free data retrieval call binding the contract method 0x8f8a6d8f.
-//
-// Solidity: function cidSizes(bytes ) view returns(uint256)
-func (_DealClient *DealClientSession) CidSizes(arg0 []byte) (*big.Int, error) {
-	return _DealClient.Contract.CidSizes(&_DealClient.CallOpts, arg0)
-}
-
-// CidSizes is a free data retrieval call binding the contract method 0x8f8a6d8f.
-//
-// Solidity: function cidSizes(bytes ) view returns(uint256)
-func (_DealClient *DealClientCallerSession) CidSizes(arg0 []byte) (*big.Int, error) {
-	return _DealClient.Contract.CidSizes(&_DealClient.CallOpts, arg0)
+// Solidity: function dealProposals(bytes32 ) view returns(bytes)
+func (_DealClient *DealClientCallerSession) DealProposals(arg0 [32]byte) ([]byte, error) {
+	return _DealClient.Contract.DealProposals(&_DealClient.CallOpts, arg0)
 }
 
 // GetDealProposal is a free data retrieval call binding the contract method 0xf4b2e4d8.
 //
-// Solidity: function getDealProposal(bytes32 id) view returns(bytes)
-func (_DealClient *DealClientCaller) GetDealProposal(opts *bind.CallOpts, id [32]byte) ([]byte, error) {
+// Solidity: function getDealProposal(bytes32 proposalId) view returns(bytes)
+func (_DealClient *DealClientCaller) GetDealProposal(opts *bind.CallOpts, proposalId [32]byte) ([]byte, error) {
 	var out []interface{}
-	err := _DealClient.contract.Call(opts, &out, "getDealProposal", id)
+	err := _DealClient.contract.Call(opts, &out, "getDealProposal", proposalId)
 
 	if err != nil {
 		return *new([]byte), err
@@ -353,16 +322,16 @@ func (_DealClient *DealClientCaller) GetDealProposal(opts *bind.CallOpts, id [32
 
 // GetDealProposal is a free data retrieval call binding the contract method 0xf4b2e4d8.
 //
-// Solidity: function getDealProposal(bytes32 id) view returns(bytes)
-func (_DealClient *DealClientSession) GetDealProposal(id [32]byte) ([]byte, error) {
-	return _DealClient.Contract.GetDealProposal(&_DealClient.CallOpts, id)
+// Solidity: function getDealProposal(bytes32 proposalId) view returns(bytes)
+func (_DealClient *DealClientSession) GetDealProposal(proposalId [32]byte) ([]byte, error) {
+	return _DealClient.Contract.GetDealProposal(&_DealClient.CallOpts, proposalId)
 }
 
 // GetDealProposal is a free data retrieval call binding the contract method 0xf4b2e4d8.
 //
-// Solidity: function getDealProposal(bytes32 id) view returns(bytes)
-func (_DealClient *DealClientCallerSession) GetDealProposal(id [32]byte) ([]byte, error) {
-	return _DealClient.Contract.GetDealProposal(&_DealClient.CallOpts, id)
+// Solidity: function getDealProposal(bytes32 proposalId) view returns(bytes)
+func (_DealClient *DealClientCallerSession) GetDealProposal(proposalId [32]byte) ([]byte, error) {
+	return _DealClient.Contract.GetDealProposal(&_DealClient.CallOpts, proposalId)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
@@ -396,77 +365,146 @@ func (_DealClient *DealClientCallerSession) Owner() (common.Address, error) {
 	return _DealClient.Contract.Owner(&_DealClient.CallOpts)
 }
 
-// Proposals is a free data retrieval call binding the contract method 0x32ed5b12.
+// PieceDeals is a free data retrieval call binding the contract method 0x0a0e0c91.
 //
-// Solidity: function proposals(bytes32 ) view returns(bytes)
-func (_DealClient *DealClientCaller) Proposals(opts *bind.CallOpts, arg0 [32]byte) ([]byte, error) {
+// Solidity: function pieceDeals(bytes ) view returns(uint64)
+func (_DealClient *DealClientCaller) PieceDeals(opts *bind.CallOpts, arg0 []byte) (uint64, error) {
 	var out []interface{}
-	err := _DealClient.contract.Call(opts, &out, "proposals", arg0)
+	err := _DealClient.contract.Call(opts, &out, "pieceDeals", arg0)
 
 	if err != nil {
-		return *new([]byte), err
+		return *new(uint64), err
 	}
 
-	out0 := *abi.ConvertType(out[0], new([]byte)).(*[]byte)
+	out0 := *abi.ConvertType(out[0], new(uint64)).(*uint64)
 
 	return out0, err
 
 }
 
-// Proposals is a free data retrieval call binding the contract method 0x32ed5b12.
+// PieceDeals is a free data retrieval call binding the contract method 0x0a0e0c91.
 //
-// Solidity: function proposals(bytes32 ) view returns(bytes)
-func (_DealClient *DealClientSession) Proposals(arg0 [32]byte) ([]byte, error) {
-	return _DealClient.Contract.Proposals(&_DealClient.CallOpts, arg0)
+// Solidity: function pieceDeals(bytes ) view returns(uint64)
+func (_DealClient *DealClientSession) PieceDeals(arg0 []byte) (uint64, error) {
+	return _DealClient.Contract.PieceDeals(&_DealClient.CallOpts, arg0)
 }
 
-// Proposals is a free data retrieval call binding the contract method 0x32ed5b12.
+// PieceDeals is a free data retrieval call binding the contract method 0x0a0e0c91.
 //
-// Solidity: function proposals(bytes32 ) view returns(bytes)
-func (_DealClient *DealClientCallerSession) Proposals(arg0 [32]byte) ([]byte, error) {
-	return _DealClient.Contract.Proposals(&_DealClient.CallOpts, arg0)
+// Solidity: function pieceDeals(bytes ) view returns(uint64)
+func (_DealClient *DealClientCallerSession) PieceDeals(arg0 []byte) (uint64, error) {
+	return _DealClient.Contract.PieceDeals(&_DealClient.CallOpts, arg0)
 }
 
-// AddCID is a paid mutator transaction binding the contract method 0xd4a0cd0a.
+// PieceProviders is a free data retrieval call binding the contract method 0xf82704f0.
 //
-// Solidity: function addCID(bytes cidraw, uint256 size) returns()
-func (_DealClient *DealClientTransactor) AddCID(opts *bind.TransactOpts, cidraw []byte, size *big.Int) (*types.Transaction, error) {
-	return _DealClient.contract.Transact(opts, "addCID", cidraw, size)
+// Solidity: function pieceProviders(bytes ) view returns(bytes provider, bool valid)
+func (_DealClient *DealClientCaller) PieceProviders(opts *bind.CallOpts, arg0 []byte) (struct {
+	Provider []byte
+	Valid    bool
+}, error) {
+	var out []interface{}
+	err := _DealClient.contract.Call(opts, &out, "pieceProviders", arg0)
+
+	outstruct := new(struct {
+		Provider []byte
+		Valid    bool
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Provider = *abi.ConvertType(out[0], new([]byte)).(*[]byte)
+	outstruct.Valid = *abi.ConvertType(out[1], new(bool)).(*bool)
+
+	return *outstruct, err
+
 }
 
-// AddCID is a paid mutator transaction binding the contract method 0xd4a0cd0a.
+// PieceProviders is a free data retrieval call binding the contract method 0xf82704f0.
 //
-// Solidity: function addCID(bytes cidraw, uint256 size) returns()
-func (_DealClient *DealClientSession) AddCID(cidraw []byte, size *big.Int) (*types.Transaction, error) {
-	return _DealClient.Contract.AddCID(&_DealClient.TransactOpts, cidraw, size)
+// Solidity: function pieceProviders(bytes ) view returns(bytes provider, bool valid)
+func (_DealClient *DealClientSession) PieceProviders(arg0 []byte) (struct {
+	Provider []byte
+	Valid    bool
+}, error) {
+	return _DealClient.Contract.PieceProviders(&_DealClient.CallOpts, arg0)
 }
 
-// AddCID is a paid mutator transaction binding the contract method 0xd4a0cd0a.
+// PieceProviders is a free data retrieval call binding the contract method 0xf82704f0.
 //
-// Solidity: function addCID(bytes cidraw, uint256 size) returns()
-func (_DealClient *DealClientTransactorSession) AddCID(cidraw []byte, size *big.Int) (*types.Transaction, error) {
-	return _DealClient.Contract.AddCID(&_DealClient.TransactOpts, cidraw, size)
+// Solidity: function pieceProviders(bytes ) view returns(bytes provider, bool valid)
+func (_DealClient *DealClientCallerSession) PieceProviders(arg0 []byte) (struct {
+	Provider []byte
+	Valid    bool
+}, error) {
+	return _DealClient.Contract.PieceProviders(&_DealClient.CallOpts, arg0)
 }
 
-// AuthorizeData is a paid mutator transaction binding the contract method 0xa6b9cea6.
+// PieceToProposal is a free data retrieval call binding the contract method 0xdd08881c.
 //
-// Solidity: function authorizeData(bytes cidraw, bytes provider, uint256 size) returns()
-func (_DealClient *DealClientTransactor) AuthorizeData(opts *bind.TransactOpts, cidraw []byte, provider []byte, size *big.Int) (*types.Transaction, error) {
-	return _DealClient.contract.Transact(opts, "authorizeData", cidraw, provider, size)
+// Solidity: function pieceToProposal(bytes ) view returns(bytes32 proposalId, bool valid)
+func (_DealClient *DealClientCaller) PieceToProposal(opts *bind.CallOpts, arg0 []byte) (struct {
+	ProposalId [32]byte
+	Valid      bool
+}, error) {
+	var out []interface{}
+	err := _DealClient.contract.Call(opts, &out, "pieceToProposal", arg0)
+
+	outstruct := new(struct {
+		ProposalId [32]byte
+		Valid      bool
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.ProposalId = *abi.ConvertType(out[0], new([32]byte)).(*[32]byte)
+	outstruct.Valid = *abi.ConvertType(out[1], new(bool)).(*bool)
+
+	return *outstruct, err
+
 }
 
-// AuthorizeData is a paid mutator transaction binding the contract method 0xa6b9cea6.
+// PieceToProposal is a free data retrieval call binding the contract method 0xdd08881c.
 //
-// Solidity: function authorizeData(bytes cidraw, bytes provider, uint256 size) returns()
-func (_DealClient *DealClientSession) AuthorizeData(cidraw []byte, provider []byte, size *big.Int) (*types.Transaction, error) {
-	return _DealClient.Contract.AuthorizeData(&_DealClient.TransactOpts, cidraw, provider, size)
+// Solidity: function pieceToProposal(bytes ) view returns(bytes32 proposalId, bool valid)
+func (_DealClient *DealClientSession) PieceToProposal(arg0 []byte) (struct {
+	ProposalId [32]byte
+	Valid      bool
+}, error) {
+	return _DealClient.Contract.PieceToProposal(&_DealClient.CallOpts, arg0)
 }
 
-// AuthorizeData is a paid mutator transaction binding the contract method 0xa6b9cea6.
+// PieceToProposal is a free data retrieval call binding the contract method 0xdd08881c.
 //
-// Solidity: function authorizeData(bytes cidraw, bytes provider, uint256 size) returns()
-func (_DealClient *DealClientTransactorSession) AuthorizeData(cidraw []byte, provider []byte, size *big.Int) (*types.Transaction, error) {
-	return _DealClient.Contract.AuthorizeData(&_DealClient.TransactOpts, cidraw, provider, size)
+// Solidity: function pieceToProposal(bytes ) view returns(bytes32 proposalId, bool valid)
+func (_DealClient *DealClientCallerSession) PieceToProposal(arg0 []byte) (struct {
+	ProposalId [32]byte
+	Valid      bool
+}, error) {
+	return _DealClient.Contract.PieceToProposal(&_DealClient.CallOpts, arg0)
+}
+
+// AddBalance is a paid mutator transaction binding the contract method 0xc71c6490.
+//
+// Solidity: function addBalance(bytes client, uint256 value) returns()
+func (_DealClient *DealClientTransactor) AddBalance(opts *bind.TransactOpts, client []byte, value *big.Int) (*types.Transaction, error) {
+	return _DealClient.contract.Transact(opts, "addBalance", client, value)
+}
+
+// AddBalance is a paid mutator transaction binding the contract method 0xc71c6490.
+//
+// Solidity: function addBalance(bytes client, uint256 value) returns()
+func (_DealClient *DealClientSession) AddBalance(client []byte, value *big.Int) (*types.Transaction, error) {
+	return _DealClient.Contract.AddBalance(&_DealClient.TransactOpts, client, value)
+}
+
+// AddBalance is a paid mutator transaction binding the contract method 0xc71c6490.
+//
+// Solidity: function addBalance(bytes client, uint256 value) returns()
+func (_DealClient *DealClientTransactorSession) AddBalance(client []byte, value *big.Int) (*types.Transaction, error) {
+	return _DealClient.Contract.AddBalance(&_DealClient.TransactOpts, client, value)
 }
 
 // HandleFilecoinMethod is a paid mutator transaction binding the contract method 0x868e10c4.
@@ -490,46 +528,67 @@ func (_DealClient *DealClientTransactorSession) HandleFilecoinMethod(method uint
 	return _DealClient.Contract.HandleFilecoinMethod(&_DealClient.TransactOpts, method, arg1, params)
 }
 
-// MakeDealProposal is a paid mutator transaction binding the contract method 0xd5d9fcbc.
+// MakeDealProposal is a paid mutator transaction binding the contract method 0x5abba064.
 //
-// Solidity: function makeDealProposal(bytes _deal, bytes size, bool verified, uint256 price) returns(bytes32)
-func (_DealClient *DealClientTransactor) MakeDealProposal(opts *bind.TransactOpts, _deal []byte, size []byte, verified bool, price *big.Int) (*types.Transaction, error) {
-	return _DealClient.contract.Transact(opts, "makeDealProposal", _deal, size, verified, price)
+// Solidity: function makeDealProposal(bytes deal) returns()
+func (_DealClient *DealClientTransactor) MakeDealProposal(opts *bind.TransactOpts, deal []byte) (*types.Transaction, error) {
+	return _DealClient.contract.Transact(opts, "makeDealProposal", deal)
 }
 
-// MakeDealProposal is a paid mutator transaction binding the contract method 0xd5d9fcbc.
+// MakeDealProposal is a paid mutator transaction binding the contract method 0x5abba064.
 //
-// Solidity: function makeDealProposal(bytes _deal, bytes size, bool verified, uint256 price) returns(bytes32)
-func (_DealClient *DealClientSession) MakeDealProposal(_deal []byte, size []byte, verified bool, price *big.Int) (*types.Transaction, error) {
-	return _DealClient.Contract.MakeDealProposal(&_DealClient.TransactOpts, _deal, size, verified, price)
+// Solidity: function makeDealProposal(bytes deal) returns()
+func (_DealClient *DealClientSession) MakeDealProposal(deal []byte) (*types.Transaction, error) {
+	return _DealClient.Contract.MakeDealProposal(&_DealClient.TransactOpts, deal)
 }
 
-// MakeDealProposal is a paid mutator transaction binding the contract method 0xd5d9fcbc.
+// MakeDealProposal is a paid mutator transaction binding the contract method 0x5abba064.
 //
-// Solidity: function makeDealProposal(bytes _deal, bytes size, bool verified, uint256 price) returns(bytes32)
-func (_DealClient *DealClientTransactorSession) MakeDealProposal(_deal []byte, size []byte, verified bool, price *big.Int) (*types.Transaction, error) {
-	return _DealClient.Contract.MakeDealProposal(&_DealClient.TransactOpts, _deal, size, verified, price)
+// Solidity: function makeDealProposal(bytes deal) returns()
+func (_DealClient *DealClientTransactorSession) MakeDealProposal(deal []byte) (*types.Transaction, error) {
+	return _DealClient.Contract.MakeDealProposal(&_DealClient.TransactOpts, deal)
 }
 
-// PublishDeal is a paid mutator transaction binding the contract method 0xd75fb3c8.
+// SimpleDealProposal is a paid mutator transaction binding the contract method 0xa70d3a9e.
 //
-// Solidity: function publish_deal(bytes raw_auth_params, address callee) returns()
-func (_DealClient *DealClientTransactor) PublishDeal(opts *bind.TransactOpts, raw_auth_params []byte, callee common.Address) (*types.Transaction, error) {
-	return _DealClient.contract.Transact(opts, "publish_deal", raw_auth_params, callee)
+// Solidity: function simpleDealProposal(bytes pieceCid, uint64 pieceSize) returns()
+func (_DealClient *DealClientTransactor) SimpleDealProposal(opts *bind.TransactOpts, pieceCid []byte, pieceSize uint64) (*types.Transaction, error) {
+	return _DealClient.contract.Transact(opts, "simpleDealProposal", pieceCid, pieceSize)
 }
 
-// PublishDeal is a paid mutator transaction binding the contract method 0xd75fb3c8.
+// SimpleDealProposal is a paid mutator transaction binding the contract method 0xa70d3a9e.
 //
-// Solidity: function publish_deal(bytes raw_auth_params, address callee) returns()
-func (_DealClient *DealClientSession) PublishDeal(raw_auth_params []byte, callee common.Address) (*types.Transaction, error) {
-	return _DealClient.Contract.PublishDeal(&_DealClient.TransactOpts, raw_auth_params, callee)
+// Solidity: function simpleDealProposal(bytes pieceCid, uint64 pieceSize) returns()
+func (_DealClient *DealClientSession) SimpleDealProposal(pieceCid []byte, pieceSize uint64) (*types.Transaction, error) {
+	return _DealClient.Contract.SimpleDealProposal(&_DealClient.TransactOpts, pieceCid, pieceSize)
 }
 
-// PublishDeal is a paid mutator transaction binding the contract method 0xd75fb3c8.
+// SimpleDealProposal is a paid mutator transaction binding the contract method 0xa70d3a9e.
 //
-// Solidity: function publish_deal(bytes raw_auth_params, address callee) returns()
-func (_DealClient *DealClientTransactorSession) PublishDeal(raw_auth_params []byte, callee common.Address) (*types.Transaction, error) {
-	return _DealClient.Contract.PublishDeal(&_DealClient.TransactOpts, raw_auth_params, callee)
+// Solidity: function simpleDealProposal(bytes pieceCid, uint64 pieceSize) returns()
+func (_DealClient *DealClientTransactorSession) SimpleDealProposal(pieceCid []byte, pieceSize uint64) (*types.Transaction, error) {
+	return _DealClient.Contract.SimpleDealProposal(&_DealClient.TransactOpts, pieceCid, pieceSize)
+}
+
+// WithdrawBalance is a paid mutator transaction binding the contract method 0xfbe22ca3.
+//
+// Solidity: function withdrawBalance(bytes client, uint256 value) returns(uint256)
+func (_DealClient *DealClientTransactor) WithdrawBalance(opts *bind.TransactOpts, client []byte, value *big.Int) (*types.Transaction, error) {
+	return _DealClient.contract.Transact(opts, "withdrawBalance", client, value)
+}
+
+// WithdrawBalance is a paid mutator transaction binding the contract method 0xfbe22ca3.
+//
+// Solidity: function withdrawBalance(bytes client, uint256 value) returns(uint256)
+func (_DealClient *DealClientSession) WithdrawBalance(client []byte, value *big.Int) (*types.Transaction, error) {
+	return _DealClient.Contract.WithdrawBalance(&_DealClient.TransactOpts, client, value)
+}
+
+// WithdrawBalance is a paid mutator transaction binding the contract method 0xfbe22ca3.
+//
+// Solidity: function withdrawBalance(bytes client, uint256 value) returns(uint256)
+func (_DealClient *DealClientTransactorSession) WithdrawBalance(client []byte, value *big.Int) (*types.Transaction, error) {
+	return _DealClient.Contract.WithdrawBalance(&_DealClient.TransactOpts, client, value)
 }
 
 // DealClientDealProposalCreateIterator is returned from FilterDealProposalCreate and is used to iterate over the raw logs and unpacked data for DealProposalCreate events raised by the DealClient contract.
@@ -602,15 +661,15 @@ func (it *DealClientDealProposalCreateIterator) Close() error {
 // DealClientDealProposalCreate represents a DealProposalCreate event raised by the DealClient contract.
 type DealClientDealProposalCreate struct {
 	Id       [32]byte
-	Size     []byte
+	Size     uint64
 	Verified bool
 	Price    *big.Int
 	Raw      types.Log // Blockchain specific contextual infos
 }
 
-// FilterDealProposalCreate is a free log retrieval operation binding the contract event 0xcb1b250d5531af7aa459e35092109f17b54741e473b86c2b755ca686f10a5833.
+// FilterDealProposalCreate is a free log retrieval operation binding the contract event 0xfd6419d07e4c269e58d0c63969756c2124155b4a8d6dd08b8cd46e3a9acbf625.
 //
-// Solidity: event DealProposalCreate(bytes32 indexed id, bytes size, bool indexed verified, uint256 price)
+// Solidity: event DealProposalCreate(bytes32 indexed id, uint64 size, bool indexed verified, uint256 price)
 func (_DealClient *DealClientFilterer) FilterDealProposalCreate(opts *bind.FilterOpts, id [][32]byte, verified []bool) (*DealClientDealProposalCreateIterator, error) {
 
 	var idRule []interface{}
@@ -630,9 +689,9 @@ func (_DealClient *DealClientFilterer) FilterDealProposalCreate(opts *bind.Filte
 	return &DealClientDealProposalCreateIterator{contract: _DealClient.contract, event: "DealProposalCreate", logs: logs, sub: sub}, nil
 }
 
-// WatchDealProposalCreate is a free log subscription operation binding the contract event 0xcb1b250d5531af7aa459e35092109f17b54741e473b86c2b755ca686f10a5833.
+// WatchDealProposalCreate is a free log subscription operation binding the contract event 0xfd6419d07e4c269e58d0c63969756c2124155b4a8d6dd08b8cd46e3a9acbf625.
 //
-// Solidity: event DealProposalCreate(bytes32 indexed id, bytes size, bool indexed verified, uint256 price)
+// Solidity: event DealProposalCreate(bytes32 indexed id, uint64 size, bool indexed verified, uint256 price)
 func (_DealClient *DealClientFilterer) WatchDealProposalCreate(opts *bind.WatchOpts, sink chan<- *DealClientDealProposalCreate, id [][32]byte, verified []bool) (event.Subscription, error) {
 
 	var idRule []interface{}
@@ -677,9 +736,9 @@ func (_DealClient *DealClientFilterer) WatchDealProposalCreate(opts *bind.WatchO
 	}), nil
 }
 
-// ParseDealProposalCreate is a log parse operation binding the contract event 0xcb1b250d5531af7aa459e35092109f17b54741e473b86c2b755ca686f10a5833.
+// ParseDealProposalCreate is a log parse operation binding the contract event 0xfd6419d07e4c269e58d0c63969756c2124155b4a8d6dd08b8cd46e3a9acbf625.
 //
-// Solidity: event DealProposalCreate(bytes32 indexed id, bytes size, bool indexed verified, uint256 price)
+// Solidity: event DealProposalCreate(bytes32 indexed id, uint64 size, bool indexed verified, uint256 price)
 func (_DealClient *DealClientFilterer) ParseDealProposalCreate(log types.Log) (*DealClientDealProposalCreate, error) {
 	event := new(DealClientDealProposalCreate)
 	if err := _DealClient.contract.UnpackLog(event, "DealProposalCreate", log); err != nil {
