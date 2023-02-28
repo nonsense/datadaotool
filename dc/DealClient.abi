@@ -276,11 +276,6 @@
               "type": "bool"
             },
             {
-              "internalType": "bytes",
-              "name": "client_addr",
-              "type": "bytes"
-            },
-            {
               "internalType": "string",
               "name": "label",
               "type": "string"
@@ -464,5 +459,4 @@
       "stateMutability": "nonpayable",
       "type": "function"
     }
-
 ]
