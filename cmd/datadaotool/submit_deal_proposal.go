@@ -4,11 +4,11 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"fmt"
-	"math/big"
 	"time"
 
+	mbig "math/big"
+
 	"github.com/davecgh/go-spew/spew"
-	ethabi "github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -16,9 +16,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/filecoin-project/go-address"
-
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/builtin/v8/market"
 	"github.com/ipfs/go-cid"
 	"github.com/nonsense/fevmtest/dc"
 	"github.com/urfave/cli/v2"
@@ -27,7 +25,9 @@ import (
 var (
 	// chain id -- ideally fetch this from chain, but seems like rpc is not supported just yet
 	// testnet
-	chainId = big.NewInt(31415926)
+	//chainId = mbig.NewInt(31415926)
+
+	chainId *mbig.Int
 
 	// hyperspace
 	//chainId = big.NewInt(3141)
@@ -67,12 +67,12 @@ var submitDealProposalCmd = &cli.Command{
 			Usage:    "root CID of the CAR file",
 			Required: true,
 		},
-		&cli.IntFlag{
-			Name:        "start-epoch",
-			Usage:       "start epoch by when the deal should be proved by provider on-chain",
-			DefaultText: "current chain head + 2 days",
+		&cli.Int64Flag{
+			Name:     "start-epoch",
+			Usage:    "start epoch by when the deal should be proved by provider on-chain",
+			Required: true,
 		},
-		&cli.IntFlag{
+		&cli.Uint64Flag{
 			Name:  "duration",
 			Usage: "duration of the deal in epochs",
 			Value: 518400, // default is 2880 * 180 == 180 days
@@ -85,7 +85,7 @@ var submitDealProposalCmd = &cli.Command{
 		&cli.BoolFlag{
 			Name:  "verified",
 			Usage: "whether the deal funds should come from verified client data-cap",
-			Value: true,
+			Value: false,
 		},
 		&cli.BoolFlag{
 			Name:  "remove-unsealed-copy",
@@ -121,9 +121,16 @@ var submitDealProposalCmd = &cli.Command{
 			Usage: "",
 			Value: "http://webserver.com/carfile.car",
 		},
+		&cli.Int64Flag{
+			Name:  "chain-id",
+			Usage: "network id",
+			Value: 3141,
+		},
 	},
 	Action: func(cctx *cli.Context) error {
 		endpoint := cctx.String("endpoint")
+
+		chainId = mbig.NewInt(cctx.Int64("chain-id"))
 
 		cl, err := rpc.Dial(endpoint)
 		if err != nil {
@@ -158,8 +165,8 @@ var submitDealProposalCmd = &cli.Command{
 
 		opts := &bind.TransactOpts{
 			From:      me,
-			GasFeeCap: big.NewInt(100000000),
-			GasTipCap: big.NewInt(100000000),
+			GasFeeCap: mbig.NewInt(100000000),
+			GasTipCap: mbig.NewInt(100000000),
 			Signer:    signFn,
 			Nonce:     nil,
 			Value:     nil,
@@ -172,13 +179,13 @@ var submitDealProposalCmd = &cli.Command{
 			return fmt.Errorf("parsing commp '%s': %w", commp, err)
 		}
 
-		pieceSize := cctx.Uint64("piece-size")
-		if pieceSize == 0 {
+		ps := cctx.Uint64("piece-size")
+		if ps == 0 {
 			return fmt.Errorf("must provide piece-size parameter for CAR url")
 		}
 
 		payloadCidStr := cctx.String("payload-cid")
-		rootCid, err := cid.Parse(payloadCidStr)
+		_, err = cid.Parse(payloadCidStr)
 		if err != nil {
 			return fmt.Errorf("parsing payload cid %s: %w", payloadCidStr, err)
 		}
@@ -188,83 +195,53 @@ var submitDealProposalCmd = &cli.Command{
 			return fmt.Errorf("size of car file cannot be 0")
 		}
 
-		//head := tipset.Height()
-
-		head := abi.ChainEpoch(0)
-
-		startEpoch := head + abi.ChainEpoch(5760)
-		endEpoch := startEpoch + 521280 // startEpoch + 181 days
-		l, err := market.NewLabelFromBytes(rootCid.Bytes())
-		if err != nil {
-			return fmt.Errorf("new label err: %w", err)
+		duration := cctx.Uint64("duration")
+		if duration == 0 {
+			return fmt.Errorf("size of car file cannot be 0")
 		}
-		lbytes, err := l.ToBytes()
-		if err != nil {
-			return fmt.Errorf("label to string err: %w", err)
-		}
+
+		startEpoch := abi.ChainEpoch(cctx.Int64("start-epoch"))
+		endEpoch := startEpoch + abi.ChainEpoch(duration) // startEpoch + 181 days
 
 		clientAddr, err := address.NewFromString(cctx.String("client")) // i guess the f4 address to the contract that should verify the deal?
 		if err != nil {
 			return err
 		}
-		providerCollateral := uint64(0)
 
-		// params marshalling
-		paramsRecord := struct {
-			LocationRef      string
-			CarSize          *big.Int
-			SkipIpniAnnounce bool
-		}{
-			cctx.String("location_ref"),
-			big.NewInt(int64(carFileSize)),
-			cctx.Bool("skip-ipni-announce"),
+		dr := dc.DealRequest{
+			PieceCid:             dc.CommonTypesCid{Data: pieceCid.Bytes()},
+			PieceSize:            ps,
+			VerifiedDeal:         cctx.Bool("verified"),
+			Client:               dc.CommonTypesFilAddress{Data: clientAddr.Bytes()},
+			Label:                payloadCidStr,
+			StartEpoch:           int64(startEpoch),
+			EndEpoch:             int64(endEpoch),
+			StoragePricePerEpoch: mbig.NewInt(0),
+			ProviderCollateral:   mbig.NewInt(cctx.Int64("provider-collateral")),
+			ClientCollateral:     mbig.NewInt(0),
+			ExtraParamsVersion:   1,
+			ExtraParams: dc.ExtraParamsV1{
+				LocationRef:        cctx.String("location_ref"),
+				CarSize:            carFileSize,
+				SkipIpniAnnounce:   cctx.Bool("skip-ipni-announce"),
+				RemoveUnsealedCopy: false,
+			},
 		}
 
-		paramsVersion1, _ := ethabi.NewType("tuple", "paramsVersion1", []ethabi.ArgumentMarshaling{
-			{Name: "location_ref", Type: "string"},
-			{Name: "car_size", Type: "uint256"},
-			{Name: "skip_ipni_announce", Type: "bool"},
-		})
-
-		params, err := ethabi.Arguments{
-			{Type: paramsVersion1, Name: "paramsVersion1"},
-		}.Pack(&paramsRecord)
+		tx, err := dealclient.MakeDealProposal(opts, dr)
 		if err != nil {
 			return err
-		}
-
-		spew.Dump(params)
-
-		dealProposal := dc.DealClientDealProposal{
-			PieceCid:        pieceCid.Bytes(),
-			PaddedPieceSize: pieceSize,
-			VerifiedDeal:    false,
-			Client:          clientAddr.Bytes(),
-			// note that there is no Provider,
-			Label:                lbytes,
-			StartEpoch:           uint64(startEpoch),
-			EndEpoch:             uint64(endEpoch),
-			StoragePricePerEpoch: cctx.Uint64("storage-price"),
-			ProviderCollateral:   providerCollateral,
-			ClientCollateral:     0,
-			Version:              cctx.String("version"),
-			Params:               params,
-		}
-
-		tx, err := dealclient.MakeDealProposal(opts, dealProposal)
-		if err != nil {
-			panic(err)
 		}
 
 		fmt.Println()
 		fmt.Println(tx.Hash())
 
-		time.Sleep(15 * time.Second)
+		time.Sleep(60 * time.Second)
 
 		hash := tx.Hash()
 		receipt, err := client.TransactionReceipt(context.Background(), hash)
 		if err != nil {
-			panic(err)
+			return err
 		}
 
 		spew.Dump(receipt)

@@ -5,6 +5,54 @@
       "type": "constructor"
     },
     {
+      "inputs": [
+        {
+          "internalType": "int256",
+          "name": "errorCode",
+          "type": "int256"
+        }
+      ],
+      "name": "ActorError",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "FailToCallActor",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "name": "InvalidCodec",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidResponseLength",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "balance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "NotEnoughBalance",
+      "type": "error"
+    },
+    {
       "anonymous": false,
       "inputs": [
         {
@@ -12,6 +60,24 @@
           "internalType": "bytes32",
           "name": "id",
           "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "size",
+          "type": "uint64"
+        },
+        {
+          "indexed": true,
+          "internalType": "bool",
+          "name": "verified",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
         }
       ],
       "name": "DealProposalCreate",
@@ -32,7 +98,7 @@
     },
     {
       "inputs": [],
-      "name": "AUTHORIZE_MESSAGE_METHOD_NUM",
+      "name": "AUTHENTICATE_MESSAGE_METHOD_NUM",
       "outputs": [
         {
           "internalType": "uint64",
@@ -57,65 +123,13 @@
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "bytes",
-          "name": "cidraw",
-          "type": "bytes"
-        },
-        {
-          "internalType": "uint256",
-          "name": "size",
-          "type": "uint256"
-        }
-      ],
-      "name": "addCID",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes",
-          "name": "cidraw",
-          "type": "bytes"
-        },
-        {
-          "internalType": "bytes",
-          "name": "provider",
-          "type": "bytes"
-        },
-        {
-          "internalType": "uint256",
-          "name": "size",
-          "type": "uint256"
-        }
-      ],
-      "name": "authorizeData",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes",
-          "name": "",
-          "type": "bytes"
-        },
-        {
-          "internalType": "bytes",
-          "name": "",
-          "type": "bytes"
-        }
-      ],
-      "name": "cidProviders",
+      "inputs": [],
+      "name": "MARKET_NOTIFY_DEAL_METHOD_NUM",
       "outputs": [
         {
-          "internalType": "bool",
+          "internalType": "uint64",
           "name": "",
-          "type": "bool"
+          "type": "uint64"
         }
       ],
       "stateMutability": "view",
@@ -124,31 +138,37 @@
     {
       "inputs": [
         {
-          "internalType": "bytes",
-          "name": "",
-          "type": "bytes"
-        }
-      ],
-      "name": "cidSet",
-      "outputs": [
+          "components": [
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct CommonTypes.FilAddress",
+          "name": "client",
+          "type": "tuple"
+        },
         {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
         }
       ],
-      "stateMutability": "view",
+      "name": "addBalance",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [
         {
-          "internalType": "bytes",
+          "internalType": "bytes32",
           "name": "",
-          "type": "bytes"
+          "type": "bytes32"
         }
       ],
-      "name": "cidSizes",
+      "name": "dealProposals",
       "outputs": [
         {
           "internalType": "uint256",
@@ -163,78 +183,35 @@
       "inputs": [
         {
           "internalType": "bytes32",
-          "name": "id",
+          "name": "proposalId",
           "type": "bytes32"
         }
       ],
       "name": "getDealProposal",
       "outputs": [
         {
-          "components": [
-            {
-              "internalType": "bytes",
-              "name": "pieceCid",
-              "type": "bytes"
-            },
-            {
-              "internalType": "uint64",
-              "name": "paddedPieceSize",
-              "type": "uint64"
-            },
-            {
-              "internalType": "bool",
-              "name": "verifiedDeal",
-              "type": "bool"
-            },
-            {
-              "internalType": "bytes",
-              "name": "client",
-              "type": "bytes"
-            },
-            {
-              "internalType": "bytes",
-              "name": "label",
-              "type": "bytes"
-            },
-            {
-              "internalType": "uint64",
-              "name": "startEpoch",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "endEpoch",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "storagePricePerEpoch",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "providerCollateral",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "clientCollateral",
-              "type": "uint64"
-            },
-            {
-              "internalType": "string",
-              "name": "version",
-              "type": "string"
-            },
-            {
-              "internalType": "bytes",
-              "name": "params",
-              "type": "bytes"
-            }
-          ],
-          "internalType": "struct DealClient.DealProposal",
+          "internalType": "bytes",
           "name": "",
-          "type": "tuple"
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getExtraParams",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "extra_params",
+          "type": "bytes"
         }
       ],
       "stateMutability": "view",
@@ -259,7 +236,23 @@
         }
       ],
       "name": "handle_filecoin_method",
-      "outputs": [],
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        },
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
       "stateMutability": "nonpayable",
       "type": "function"
     },
@@ -268,79 +261,109 @@
         {
           "components": [
             {
-              "internalType": "bytes",
-              "name": "pieceCid",
-              "type": "bytes"
+              "components": [
+                {
+                  "internalType": "bytes",
+                  "name": "data",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct CommonTypes.Cid",
+              "name": "piece_cid",
+              "type": "tuple"
             },
             {
               "internalType": "uint64",
-              "name": "paddedPieceSize",
+              "name": "piece_size",
               "type": "uint64"
             },
             {
               "internalType": "bool",
-              "name": "verifiedDeal",
+              "name": "verified_deal",
               "type": "bool"
             },
             {
-              "internalType": "bytes",
+              "components": [
+                {
+                  "internalType": "bytes",
+                  "name": "data",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct CommonTypes.FilAddress",
               "name": "client",
-              "type": "bytes"
-            },
-            {
-              "internalType": "bytes",
-              "name": "label",
-              "type": "bytes"
-            },
-            {
-              "internalType": "uint64",
-              "name": "startEpoch",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "endEpoch",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "storagePricePerEpoch",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "providerCollateral",
-              "type": "uint64"
-            },
-            {
-              "internalType": "uint64",
-              "name": "clientCollateral",
-              "type": "uint64"
+              "type": "tuple"
             },
             {
               "internalType": "string",
-              "name": "version",
+              "name": "label",
               "type": "string"
             },
             {
-              "internalType": "bytes",
-              "name": "params",
-              "type": "bytes"
+              "internalType": "int64",
+              "name": "start_epoch",
+              "type": "int64"
+            },
+            {
+              "internalType": "int64",
+              "name": "end_epoch",
+              "type": "int64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "storage_price_per_epoch",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "provider_collateral",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "client_collateral",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint64",
+              "name": "extra_params_version",
+              "type": "uint64"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "location_ref",
+                  "type": "string"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "car_size",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "skip_ipni_announce",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "remove_unsealed_copy",
+                  "type": "bool"
+                }
+              ],
+              "internalType": "struct ExtraParamsV1",
+              "name": "extra_params",
+              "type": "tuple"
             }
           ],
-          "internalType": "struct DealClient.DealProposal",
-          "name": "_deal",
+          "internalType": "struct DealRequest",
+          "name": "deal",
           "type": "tuple"
         }
       ],
       "name": "makeDealProposal",
-      "outputs": [
-        {
-          "internalType": "bytes32",
-          "name": "",
-          "type": "bytes32"
-        }
-      ],
+      "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
@@ -360,72 +383,17 @@
     {
       "inputs": [
         {
-          "internalType": "bytes32",
+          "internalType": "bytes",
           "name": "",
-          "type": "bytes32"
+          "type": "bytes"
         }
       ],
-      "name": "proposals",
+      "name": "pieceDeals",
       "outputs": [
         {
-          "internalType": "bytes",
-          "name": "pieceCid",
-          "type": "bytes"
-        },
-        {
           "internalType": "uint64",
-          "name": "paddedPieceSize",
+          "name": "",
           "type": "uint64"
-        },
-        {
-          "internalType": "bool",
-          "name": "verifiedDeal",
-          "type": "bool"
-        },
-        {
-          "internalType": "bytes",
-          "name": "client",
-          "type": "bytes"
-        },
-        {
-          "internalType": "bytes",
-          "name": "label",
-          "type": "bytes"
-        },
-        {
-          "internalType": "uint64",
-          "name": "startEpoch",
-          "type": "uint64"
-        },
-        {
-          "internalType": "uint64",
-          "name": "endEpoch",
-          "type": "uint64"
-        },
-        {
-          "internalType": "uint64",
-          "name": "storagePricePerEpoch",
-          "type": "uint64"
-        },
-        {
-          "internalType": "uint64",
-          "name": "providerCollateral",
-          "type": "uint64"
-        },
-        {
-          "internalType": "uint64",
-          "name": "clientCollateral",
-          "type": "uint64"
-        },
-        {
-          "internalType": "string",
-          "name": "version",
-          "type": "string"
-        },
-        {
-          "internalType": "bytes",
-          "name": "params",
-          "type": "bytes"
         }
       ],
       "stateMutability": "view",
@@ -435,17 +403,78 @@
       "inputs": [
         {
           "internalType": "bytes",
-          "name": "raw_auth_params",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "pieceProviders",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "provider",
           "type": "bytes"
         },
         {
-          "internalType": "address",
-          "name": "callee",
-          "type": "address"
+          "internalType": "bool",
+          "name": "valid",
+          "type": "bool"
         }
       ],
-      "name": "publish_deal",
-      "outputs": [],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "name": "pieceToProposal",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "proposalId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bool",
+          "name": "valid",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct CommonTypes.FilAddress",
+          "name": "client",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "nonpayable",
       "type": "function"
     }
