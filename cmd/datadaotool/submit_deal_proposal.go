@@ -23,19 +23,13 @@ import (
 )
 
 var (
-	// chain id -- ideally fetch this from chain, but seems like rpc is not supported just yet
-	// testnet
-	//chainId = mbig.NewInt(31415926)
-
 	chainId *mbig.Int
 
 	// hyperspace
-	//chainId = big.NewInt(3141)
+	// 3141
 
-	//chainID, err := client.NetworkID(context.Background())
-	//if err != nil {
-	//log.Fatal(err)
-	//}
+	// testnet
+	// 31415926
 )
 
 var submitDealProposalCmd = &cli.Command{
@@ -224,7 +218,7 @@ var submitDealProposalCmd = &cli.Command{
 				LocationRef:        cctx.String("location_ref"),
 				CarSize:            carFileSize,
 				SkipIpniAnnounce:   cctx.Bool("skip-ipni-announce"),
-				RemoveUnsealedCopy: false,
+				RemoveUnsealedCopy: cctx.Bool("remove-unsealed-copy"),
 			},
 		}
 
