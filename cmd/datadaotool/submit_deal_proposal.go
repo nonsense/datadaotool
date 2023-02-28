@@ -206,7 +206,7 @@ var submitDealProposalCmd = &cli.Command{
 			PieceCid:             pieceCid.Bytes(),
 			PieceSize:            ps,
 			VerifiedDeal:         cctx.Bool("verified"),
-			Client:               clientAddr.Bytes(),
+			ClientAddr:           clientAddr.Bytes(),
 			Label:                payloadCidStr,
 			StartEpoch:           int64(startEpoch),
 			EndEpoch:             int64(endEpoch),
