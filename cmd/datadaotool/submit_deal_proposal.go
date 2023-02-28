@@ -16,12 +16,9 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/filecoin-project/go-address"
-	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
-	"github.com/filecoin-project/go-state-types/big"
 	"github.com/ipfs/go-cid"
 	"github.com/nonsense/fevmtest/dc"
-	ftypes "github.com/nonsense/fevmtest/types"
 	"github.com/urfave/cli/v2"
 )
 
@@ -88,7 +85,7 @@ var submitDealProposalCmd = &cli.Command{
 		&cli.BoolFlag{
 			Name:  "verified",
 			Usage: "whether the deal funds should come from verified client data-cap",
-			Value: true,
+			Value: false,
 		},
 		&cli.BoolFlag{
 			Name:  "remove-unsealed-copy",
@@ -186,7 +183,6 @@ var submitDealProposalCmd = &cli.Command{
 		if ps == 0 {
 			return fmt.Errorf("must provide piece-size parameter for CAR url")
 		}
-		pieceSize := abi.PaddedPieceSize(ps)
 
 		payloadCidStr := cctx.String("payload-cid")
 		_, err = cid.Parse(payloadCidStr)
@@ -206,58 +202,33 @@ var submitDealProposalCmd = &cli.Command{
 
 		startEpoch := abi.ChainEpoch(cctx.Int64("start-epoch"))
 		endEpoch := startEpoch + abi.ChainEpoch(duration) // startEpoch + 181 days
-		l, err := ftypes.NewLabelFromString(payloadCidStr)
-		if err != nil {
-			return fmt.Errorf("new label err: %w", err)
-		}
 
 		clientAddr, err := address.NewFromString(cctx.String("client")) // i guess the f4 address to the contract that should verify the deal?
 		if err != nil {
 			return err
 		}
-		providerCollateral := abi.NewTokenAmount(cctx.Int64("provider-collateral"))
 
-		//storagePrice := abi.NewTokenAmount(cctx.Int64("storage-price"))
-		//storagePricePerEpochForDeal := big.Div(big.Mul(big.NewInt(int64(pieceSize)), storagePrice), big.NewInt(int64(1<<30)))
-
-		paramsV1Cbor := ftypes.ParamsVersion1{
-			LocationRef:      cctx.String("location_ref"),
-			CarSize:          carFileSize,
-			SkipIpniAnnounce: cctx.Bool("skip-ipni-announce"),
+		dr := dc.DealRequest{
+			PieceCid:             dc.CommonTypesCid{Data: pieceCid.Bytes()},
+			PieceSize:            ps,
+			VerifiedDeal:         cctx.Bool("verified"),
+			Client:               dc.CommonTypesFilAddress{Data: clientAddr.Bytes()},
+			Label:                payloadCidStr,
+			StartEpoch:           int64(startEpoch),
+			EndEpoch:             int64(endEpoch),
+			StoragePricePerEpoch: mbig.NewInt(0),
+			ProviderCollateral:   mbig.NewInt(cctx.Int64("provider-collateral")),
+			ClientCollateral:     mbig.NewInt(0),
+			ExtraParamsVersion:   1,
+			ExtraParams: dc.ExtraParamsV1{
+				LocationRef:        cctx.String("location_ref"),
+				CarSize:            carFileSize,
+				SkipIpniAnnounce:   cctx.Bool("skip-ipni-announce"),
+				RemoveUnsealedCopy: false,
+			},
 		}
 
-		params, err := cborutil.Dump(&paramsV1Cbor)
-		if err != nil {
-			return err
-		}
-
-		spew.Dump(l)
-
-		proposalCbor := ftypes.DealProposalCbor{
-			PieceCID:     pieceCid,
-			PieceSize:    pieceSize,
-			VerifiedDeal: false,
-			Client:       clientAddr,
-			Label:        l,
-			StartEpoch:   startEpoch,
-			EndEpoch:     endEpoch,
-			//StoragePricePerEpoch: storagePricePerEpochForDeal,
-			StoragePricePerEpoch: big.NewInt(0),
-			ProviderCollateral:   providerCollateral,
-			Version:              cctx.String("version"),
-			Params:               params,
-		}
-
-		buf, err := cborutil.Dump(&proposalCbor)
-		if err != nil {
-			return err
-		}
-
-		spew.Dump(buf)
-
-		spew.Dump("len:", len(buf))
-
-		tx, err := dealclient.MakeDealProposal(opts, buf)
+		tx, err := dealclient.MakeDealProposal(opts, dr)
 		if err != nil {
 			return err
 		}
