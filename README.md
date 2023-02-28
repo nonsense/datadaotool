@@ -1,19 +1,25 @@
 # datadaotool
 
-This repo/tool is supposed to interact with the proof-of-concept [DealClient.sol](https://github.com/nonsense/fevm-hardhat-kit/blob/nonsense/deal-client-contract/contracts/basic-deal-client/DealClient.sol) deal proposal contract at
+This repo/tool is supposed to interact with the proof-of-concept [DealClient.sol](https://github.com/filecoin-project/fevm-hardhat-kit/pull/90) deal proposal contract
 
 # commands
 
 - `datadaotool submit-deal` -- submits a deal proposal on chain for SP's that have `AcceptContractDeals: true` config enables and are monitoring the Filecoin chain for deals
-- `datadaomonitor run` -- simple monitor tool to listen for `DealProposalCreate(bytes32)` events emitted on chain and fetch proposal `id`s
-- `datadaotool get-deal` -- fetch deal proposal and deal params from chain based on `id`
 
 # examples
 
 ```
-$ datadaomonitor run
+$ export PRIVATE_KEY=aef394....
 
-$ datadaotool submit-deal --contract=0xF54d13E2AFb212Da562E3ab4BFB4372c63913eb6 --commp=bafk2bzacec3jst4tkh424chatp273o6rxvipfg54kphd56gaxobpcdtr2sgco --piece-size=2048 --car-size=1175 --payload-cid=bafk2bzacec3jst4tkh424chatp273o6rxvipfg54kphd56gaxobpcdtr2sgco
-
-$ datadaotool get-deal --contract=0xF54d13E2AFb212Da562E3ab4BFB4372c63913eb6 --id 0xa9b075aa51a2013c5b2e936d1f0a7418b195a3e49f39cfc923b4dc2bfcf1204e
+$ datadaotool submit-deal \
+  --contract=0x92780Bc6E860a935307f000eE90C5AA1878454D4 \
+  --commp=baga6ea4seaqlnvynus6vwba7rob4tuslkutuvl6zuon46cfla4ebkxcn3yxd2ji \
+  --piece-size=262144 \
+  --car-size=236445 \
+  --start-epoch=146694 \
+  --storage-price=0 \
+  --payload-cid=bafk2bzaceanzppnlffioby4nac2hhjmrstzntqie3oid4ovq6zu4qhhjs4bvy \
+  --client=t410fsj4axrximcutkmd7aahosdc2ugdyivguhncj5ri \
+  --skip-ipni-announce=true \
+  --location_ref=http://webserver:24005/screenshot.car
 ```
