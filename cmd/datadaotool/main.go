@@ -12,6 +12,7 @@ var log = logging.Logger("datadaotool")
 func main() {
 	local := []*cli.Command{
 		submitDealProposalCmd,
+		getDealProposalCmd,
 	}
 
 	app := &cli.App{

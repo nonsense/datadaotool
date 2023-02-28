@@ -203,10 +203,10 @@ var submitDealProposalCmd = &cli.Command{
 		}
 
 		dr := dc.DealRequest{
-			PieceCid:             dc.CommonTypesCid{Data: pieceCid.Bytes()},
+			PieceCid:             pieceCid.Bytes(),
 			PieceSize:            ps,
 			VerifiedDeal:         cctx.Bool("verified"),
-			Client:               dc.CommonTypesFilAddress{Data: clientAddr.Bytes()},
+			Client:               clientAddr.Bytes(),
 			Label:                payloadCidStr,
 			StartEpoch:           int64(startEpoch),
 			EndEpoch:             int64(endEpoch),
