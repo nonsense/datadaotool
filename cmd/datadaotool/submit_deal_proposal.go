@@ -192,11 +192,6 @@ var submitDealProposalCmd = &cli.Command{
 		startEpoch := abi.ChainEpoch(cctx.Int64("start-epoch"))
 		endEpoch := startEpoch + abi.ChainEpoch(duration) // startEpoch + 181 days
 
-		//clientAddr, err := address.NewFromString(cctx.String("client")) // i guess the f4 address to the contract that should verify the deal?
-		//if err != nil {
-		//	return err
-		//}
-
 		dr := dc.DealRequest{
 			PieceCid:             pieceCid.Bytes(),
 			PieceSize:            ps,
