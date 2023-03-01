@@ -15,7 +15,6 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/ipfs/go-cid"
 	"github.com/nonsense/fevmtest/dc"
@@ -85,10 +84,6 @@ var submitDealProposalCmd = &cli.Command{
 			Name:  "remove-unsealed-copy",
 			Usage: "indicates that an unsealed copy of the sector in not required for fast retrieval",
 			Value: false,
-		},
-		&cli.StringFlag{
-			Name:  "client",
-			Usage: "client address to be used to initiate the deal - should point to contract?",
 		},
 		&cli.BoolFlag{
 			Name:  "skip-ipni-announce",
@@ -197,16 +192,10 @@ var submitDealProposalCmd = &cli.Command{
 		startEpoch := abi.ChainEpoch(cctx.Int64("start-epoch"))
 		endEpoch := startEpoch + abi.ChainEpoch(duration) // startEpoch + 181 days
 
-		clientAddr, err := address.NewFromString(cctx.String("client")) // i guess the f4 address to the contract that should verify the deal?
-		if err != nil {
-			return err
-		}
-
 		dr := dc.DealRequest{
 			PieceCid:             pieceCid.Bytes(),
 			PieceSize:            ps,
 			VerifiedDeal:         cctx.Bool("verified"),
-			ClientAddr:           clientAddr.Bytes(),
 			Label:                payloadCidStr,
 			StartEpoch:           int64(startEpoch),
 			EndEpoch:             int64(endEpoch),
