@@ -19,7 +19,6 @@ $ datadaotool submit-deal \
   --start-epoch=146694 \
   --storage-price=0 \
   --payload-cid=bafk2bzaceanzppnlffioby4nac2hhjmrstzntqie3oid4ovq6zu4qhhjs4bvy \
-  --client=t410fsj4axrximcutkmd7aahosdc2ugdyivguhncj5ri \
   --skip-ipni-announce=true \
   --location_ref=http://webserver:24005/screenshot.car
 ```

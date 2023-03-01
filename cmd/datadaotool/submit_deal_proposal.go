@@ -73,7 +73,7 @@ var submitDealProposalCmd = &cli.Command{
 		&cli.Int64Flag{
 			Name:  "storage-price",
 			Usage: "storage price in attoFIL per epoch per GiB",
-			Value: 1,
+			Value: 0,
 		},
 		&cli.BoolFlag{
 			Name:  "verified",
@@ -186,7 +186,7 @@ var submitDealProposalCmd = &cli.Command{
 
 		duration := cctx.Uint64("duration")
 		if duration == 0 {
-			return fmt.Errorf("size of car file cannot be 0")
+			return fmt.Errorf("duration of deal cant be 0")
 		}
 
 		startEpoch := abi.ChainEpoch(cctx.Int64("start-epoch"))
@@ -199,7 +199,7 @@ var submitDealProposalCmd = &cli.Command{
 			Label:                payloadCidStr,
 			StartEpoch:           int64(startEpoch),
 			EndEpoch:             int64(endEpoch),
-			StoragePricePerEpoch: mbig.NewInt(0),
+			StoragePricePerEpoch: mbig.NewInt(cctx.Int64("storage-price")),
 			ProviderCollateral:   mbig.NewInt(cctx.Int64("provider-collateral")),
 			ClientCollateral:     mbig.NewInt(0),
 			ExtraParamsVersion:   1,
